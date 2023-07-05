@@ -4,6 +4,10 @@ fetch ('http://localhost:5678/api/works')
 .then((works) => works.json())
 .then((data) => console.log(data));
 */
+const filters = document.getElementById("filters");
+const galleryElement = document.querySelector(".gallery");
+const filterList = Array.from;
+
 async function fetchWorks() {
   const reponse = await fetch ('http://localhost:5678/api/works');
   const data = await reponse.json();
@@ -12,10 +16,8 @@ async function fetchWorks() {
 fetchWorks().then(works => {
    // Fonction d’affichage des filtres 
   function displayFilters(works) {
-    const filters = document.getElementById("filters")
     // Affichage des filtres
-      if (displayFilters(works)) {
-        const filters = document.getElementById("filters");
+      if (displayFilters(works)) {       
         // Ajouter le filtre "Tous" en premier dans la liste des filtres
         filters.innerHTML += `<li class="filter" id="0"></li>`;
       } 
@@ -26,23 +28,22 @@ fetchWorks().then(works => {
           return fetchWorks()
             .then(works => { 
         // Sélectionnez l’élément de la galerie cible dans le sélecteur spécifié
-          const galleryElement = document.querySelector(".gallery");
           galleryElement.innerHTML = "";
-
+/*
           works.forEach(jsonWork => {
             // Create the figure element to represent the project
             // Créer l’élément de figure pour représenter le projet
             const figure = document.createElement('figure');
             figure.classList.add('work');
             figure.dataset.categories = jsonWork.category;
-          })
+          })*/
         })
             //création d'une liste de filtres en triant les catégories
-            const filterList = Array.from(new set(works.map(jsonWork =>jsonWork.categoryId)));
+            filterList = Array.from(new set(works.map(jsonWork =>jsonWork.categoryId)));
             console.log(filterList);
   
-            filterList.forEach(category => {
-              const categoryName = works.find(work => work.category === category).category.name;
+            filterList.forEach(categoryId => {
+              const categoryName = works.find(work => work.categoryId === categoryId).category.name;
               filters.innerText = `<li class="filter" id="${categoryId}">${categoryName}</li>`;
               })
           }
