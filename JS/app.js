@@ -18,6 +18,10 @@ async function fetchWorks() {
   return data;
 }
 fetchWorks().then(works => {
+  console.log(works);
+  fetchWorksDisplayGallery(works, '.gallery');
+  })
+
    // Fonction d’affichage des filtres 
   function displayFilters(works) {
     const filters = document.getElementById("filters");
@@ -37,46 +41,43 @@ fetchWorks().then(works => {
       } 
       // Afficher les projets dans la galerie
       else (fetchWorksDisplayGallery(".gallery")); {
-        // Fonction d’affichage de la galerie de la page d’accueil ou du mode
-        function fetchWorksDisplayGallery(targetElement) {
-        // Sélectionnez l’élément de la galerie cible dans le sélecteur spécifié
-          galleryElement.innerHTML = "";
-          return works()
-          .then(works => {
-            const galleryElement = document.querySelector(targetElement);
-
-            works.forEach(jsonWork => {
-              const figure = document.createElement('figure');
-              figure.classLiss.add('work');
-              figure.dataset.category = jsonWork.categoryId;
-              
-              const img = document.createElement('img');
-              img.src = jsonWork.imageUrl;
-              img.alt = 'image projet';
-              
-              figure.appendChild(img);
-              if(targetElement === 'gallery') {
-                const figcaption = document.createElement('figcaption');
-                figcaption.textContent =jsonWork.title;
-                figure.appendChild(figcaption);
-              }
-              if(targetElement === 'modal-gallery') {
-                const figcaption = document.createElement('figcaption');
-                figcaption.textContent ='éditer';
-                figure.appendChild(figcaption);
-
-                const idWork = jsonWork.id;
-              }
-            
-          });
-        }) 
-        }     
+             
       }
     }
-})
+// Fonction d’affichage de la galerie de la page d’accueil ou du mode
+function fetchWorksDisplayGallery(works, targetElement) {
+  // Sélectionnez l’élément de la galerie cible dans le sélecteur spécifié
+   // galleryElement.innerHTML = "";
+    
+      const galleryElement = document.querySelector(targetElement);
 
-  
+      works.forEach(jsonWork => {
+        const figure = document.createElement('figure');
+        figure.classList.add('work');
+        figure.dataset.category = jsonWork.categoryId;
+        
+        const img = document.createElement('img');
+        img.src = jsonWork.imageUrl;
+        img.alt = jsonWork.title;
+        
+        figure.appendChild(img);
+        if(targetElement === 'gallery') {
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent =jsonWork.title;
+          figure.appendChild(figcaption);
+        }
+        if(targetElement === 'modal-gallery') {
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent ='éditer';
+          figure.appendChild(figcaption);
 
+          const idWork = jsonWork.id;
+        }
+      //ajouter la figure créer a la galerie 
+      galleryElement.appendChild(figure);
+    });
+   
+}
    
 //récupérer des données de l'API "catégories"
 /*
