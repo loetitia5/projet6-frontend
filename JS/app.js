@@ -5,8 +5,12 @@ const works = document.querySelectorAll(".work");
 //Récupérer les données de l'API "works"
 const filters = document.querySelectorAll(".filter");
 
-//cliqueant sur le filtre "tous", tous les projets sont affichées
-filterAll.addEventListener("click", viewAllWorks);
+// Parcourir tous les filters, à l'exception du fitre "tous"
+filters.forEach(filter => {
+  if (filter !== filterAll) {
+    filter.addEventListener("click",() => { works()})
+  }
+});
 //Retrieve data from the "works" API (récupérer des données de l'API "works")
 /*
 fetch ('http://localhost:5678/api/works')
@@ -84,7 +88,7 @@ function fetchWorksDisplayGallery(works, targetElement) {
         filterList = Array.from(works.mapFn(jsonWork =>jsonWork.categoryId));
         console.log(filterList);
 
-        //trouve le premier element
+        //trouve le premier element dans le tableau
         filterList.forEach(categoryId => {
         const categoryName = works.find(work => work.categoryId === categoryId).category.name;
         filters.innerText = `<li class="filter" id="${categoryId}">${categoryName}</li>`;
@@ -144,8 +148,12 @@ function viewAllWorks() {
   //Récupérer tous les filtres et tâches 
   const buttonFilters = document.querySelectorAll(".filter");
   const filterAll = buttonFilters[0];
+  //cliqueant sur le filtre "tous", tous les projets sont affichées
+  filterAll.addEventListener("click", viewAllWorks);
   //Afficher tous les projets 
   works.forEach(work => work.getElementsByClassName.display = "block");
   deleteActiveCLass();
+//Ajouter la classe "filter_active" au filtre "All"
+  filterAll.classList.add("filter_active");
+};
 
-}
