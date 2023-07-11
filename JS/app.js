@@ -1,16 +1,13 @@
 const galleryElement = document.querySelector(".gallery");
 const filterList = Array.from;
+const buttonFilters = document.querySelectorAll(".filter");
 const filter = document.querySelector("#filter");
 const works = document.querySelectorAll(".work");
+
 //Récupérer les données de l'API "works"
 const filters = document.querySelectorAll(".filter");
 
-// Parcourir tous les filters, à l'exception du fitre "tous"
-filters.forEach(filter => {
-  if (filter !== filterAll) {
-    filter.addEventListener("click",() => { works()})
-  }
-});
+
 //Retrieve data from the "works" API (récupérer des données de l'API "works")
 /*
 fetch ('http://localhost:5678/api/works')
@@ -27,6 +24,31 @@ fetchWorks().then(works => {
   fetchWorksDisplayGallery(works, '.gallery');
   })
 
+  //supprimer la classe "filter_active" de tous les filtres
+  function deleteClass() {
+    const buttonFilters = document.querySelectorAll(".filter");
+    buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
+  }
+  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
+function viewAllWorks() {
+  //Récupérer tous les filtres et tâches 
+  const filterAll = buttonFilters[0];
+
+   //Afficher tous les projets 
+   works.forEach(work => work.style.display = "block");
+   deleteActiveCLass();
+   //Ajouter la classe "filter_active" au filtre "All"
+   filterAll.classList.add("filter_active");
+   
+  //cliqueant sur le filtre "tous", tous les projets sont affichées
+  filterAll.addEventListener("click", viewAllWorks);
+  // Parcourir tous les filters, à l'exception du fitre "tous"
+  buttonFilters.forEach(buttonFilter => {
+    if (buttonFilter !== filterAll) {
+      buttonFilter.addEventListener("click",(event) => { works(event)})
+    }
+  });
+}
 //récupérer des données de l'API "catégories"
 /*
 fetch ('http://localhost:5678/api/categories')
@@ -41,6 +63,7 @@ async function fetchCategories() {
 fetchCategories().then(categories => {
   console.log(categories);
 });
+
 // Fonction d’affichage de la galerie de la page d’accueil ou du mode
 function fetchWorksDisplayGallery(works, targetElement) {
   // Sélectionnez l’élément de la galerie 
@@ -63,7 +86,7 @@ function fetchWorksDisplayGallery(works, targetElement) {
         const figcaption = document.createElement('figcaption');
         figcaption.textContent = jsonWork.title;
         figure.appendChild(figcaption);
-      }/*
+      }
       //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
       if(targetElement === 'modal-gallery') {
         const figcaption = document.createElement('figcaption');
@@ -71,12 +94,13 @@ function fetchWorksDisplayGallery(works, targetElement) {
         figure.appendChild(figcaption);
 
         const idWork = jsonWork.id;
-      }*/
+      }
       //ajouter la figure créer a la galerie 
       galleryElement.appendChild(figure);
     });
    
 }
+
    // Fonction d’affichage des filtres 
    function displayFilters(works) {
     const filters = document.getElementById("filters");
@@ -84,8 +108,8 @@ function fetchWorksDisplayGallery(works, targetElement) {
       if (displayFilters(works)) {       
         // Ajouter le filtre "Tous" en premier dans la liste des filtres
         filters.innerHTML += `<li class="filter" id="0">Tous</li>`;
-        //création d'une liste de filtres en triant les catégories
-        filterList = Array.from(works.mapFn(jsonWork =>jsonWork.categoryId));
+        //création d'une liste de catérories en triant les catégories
+        const filterList = Array.from(new Set(works.map(jsonWork =>jsonWork.categoryId)));
         console.log(filterList);
 
         //trouve le premier element dans le tableau
@@ -100,15 +124,9 @@ function fetchWorksDisplayGallery(works, targetElement) {
       }
     }
 
-  
-  /*
-//création d'une liste de filtres en triant les catégories 
-const filterList = Array.from(new set(works.map(work =>work.categoryId)));
-console.log(filterList);
-*/
 categories.forEach((category) => {
   const filter = document.createElement("li");
- filter.innerText = category.name;
+  filter.innerText = category.name;
   filter.classList.add("li");
 
   filter.addEventListener("click", async () => {
@@ -143,17 +161,5 @@ function createElementbutton(classNames = [], textContent = "") {
   }
   return button;
 }
-//Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
-function viewAllWorks() {
-  //Récupérer tous les filtres et tâches 
-  const buttonFilters = document.querySelectorAll(".filter");
-  const filterAll = buttonFilters[0];
-  //cliqueant sur le filtre "tous", tous les projets sont affichées
-  filterAll.addEventListener("click", viewAllWorks);
-  //Afficher tous les projets 
-  works.forEach(work => work.getElementsByClassName.display = "block");
-  deleteActiveCLass();
-//Ajouter la classe "filter_active" au filtre "All"
-  filterAll.classList.add("filter_active");
-};
 
+ 

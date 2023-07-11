@@ -6,13 +6,14 @@ const form = document.getElementById("form");
 form.addEventListener("submit", submitForm); 
 
 
-//Gestion du formulaire
 
 
+//Fonction pour soumettre le formulaire 
 async function submitForm(event){
     event.preventDefault();
 
     try {
+        //POST demande d'envoi 
         const url ='http://localhost:5678/api/users/login';
         const response =await fetch(url, {
             method: "POST",
