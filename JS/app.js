@@ -1,4 +1,4 @@
-const galleryElement = document.querySelector(".gallery");
+const galleryElement = document.querySelector('.gallery');
 const filterList = Array.from;
 const buttonFilters = document.querySelectorAll(".filter");
 const filter = document.querySelector("#filter");
@@ -24,47 +24,7 @@ fetchWorks().then(works => {
   fetchWorksDisplayGallery(works, '.gallery');
   })
 
-  //supprimer la classe "filter_active" de tous les filtres
-  function deleteClass() {
-    const buttonFilters = document.querySelectorAll(".filter");
-    buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
-  }
-  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
-function viewAllWorks() {
-  //Récupérer tous les filtres et tâches 
-  const filterAll = buttonFilters[0];
-
-   //Afficher tous les projets 
-   works.forEach(work => work.style.display = "block");
-   deleteActiveCLass();
-   //Ajouter la classe "filter_active" au filtre "All"
-   filterAll.classList.add("filter_active");
-   
-  //cliqueant sur le filtre "tous", tous les projets sont affichées
-  filterAll.addEventListener("click", viewAllWorks);
-  // Parcourir tous les filters, à l'exception du fitre "tous"
-  buttonFilters.forEach(buttonFilter => {
-    if (buttonFilter !== filterAll) {
-      buttonFilter.addEventListener("click",(event) => { works(event)})
-    }
-  });
-}
-//récupérer des données de l'API "catégories"
-/*
-fetch ('http://localhost:5678/api/categories')
-.then((categories) => categories.json())
-.then((data) => console.log(data));
-*/
-async function fetchCategories() {
-  const reponse = await fetch ('http://localhost:5678/api/categories');
-  const data = await reponse.json();
-  return data;
-}
-fetchCategories().then(categories => {
-  console.log(categories);
-});
-
-// Fonction d’affichage de la galerie de la page d’accueil ou du mode
+  // Fonction d’affichage de la galerie de la page d’accueil ou du mode
 function fetchWorksDisplayGallery(works, targetElement) {
   // Sélectionnez l’élément de la galerie 
     const galleryElement = document.querySelector(targetElement);
@@ -100,6 +60,47 @@ function fetchWorksDisplayGallery(works, targetElement) {
     });
    
 }
+  //supprimer la classe "filter_active" de tous les filtres
+  function deleteClass() {
+    const buttonFilters = document.querySelectorAll(".filter");
+    buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
+  }
+  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
+function viewAllWorks() {
+  //Récupérer tous les filtres et tâches 
+  const filterAll = buttonFilters[0];
+
+   //Afficher tous les projets 
+   works.forEach(work => work.style.display = "block");
+   deleteCLass();
+   //Ajouter la classe "filter_active" au filtre "All"
+   filterAll.classList.add("filter_active");
+
+  //cliqueant sur le filtre "tous", tous les projets sont affichées
+  filterAll.addEventListener("click", viewAllWorks);
+  // Parcourir tous les filters, à l'exception du fitre "tous"
+  buttonFilters.forEach(buttonFilter => {
+    if (buttonFilter !== filterAll) {
+      buttonFilter.addEventListener("click",(event) => { works(event)})
+    }
+  });
+}
+//récupérer des données de l'API "catégories"
+/*
+fetch ('http://localhost:5678/api/categories')
+.then((categories) => categories.json())
+.then((data) => console.log(data));
+*/
+async function fetchCategories() {
+  const reponse = await fetch ('http://localhost:5678/api/categories');
+  const data = await reponse.json();
+  return data;
+}
+fetchCategories().then(categories => {
+  console.log(categories);
+});
+
+
 
    // Fonction d’affichage des filtres 
    function displayFilters(works) {
@@ -163,3 +164,16 @@ function createElementbutton(classNames = [], textContent = "") {
 }
 
  
+//fonction pour filter et afficher par catégories les projets
+function filterWorks(event) {
+  const buttonFilterId = event.target.getAttribute("id");
+  deleteClass();
+  //Ajouter la class"filter_active" au filtre "all"
+  filterAll.classList.add("filter_active");
+
+  //Récupérer tous les travaux  
+  const works =document.querySelectorAll(".work");
+  works.forEach(work => {
+    work.style.display = work.dataset.category === buttonFilterId ? "block" : "none";
+  })
+} 
