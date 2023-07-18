@@ -197,3 +197,18 @@ function freshGallery(selector) {
     fetchWorksDisplayGallery(selector);
   }
 }
+
+//Fonction permettant de créer et d'afficher un message d'erreur 
+function errorMessage(message, selector) {
+  const containerError = document.querySelector(selector);
+  const errorElement = containerError.querySelector('.error-message');
+  if(errorElement) {
+    errorElement.remove();
+  }
+  const errorDuMessage = document.createElement('p');
+
+  errorDuMessage.classList.add('error-message');
+  errorDuMessage.innerHTML = message;
+
+  containerError.appendChild(errorDuMessage);
+}
