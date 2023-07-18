@@ -61,6 +61,25 @@
 		</ul>
 	</nav>
 </footer>
+
+<!--Modale-->
+<aside id="modal" class="modal">
+	<div class="overlay"></div>
+	<div class="wrapper">
+		<!--first page-->
+		<div id="frist-page">
+			<h2 class="modal-title">Galerie Photo</h2>
+			<div id="modal_gallery"></div>
+			<button class="btn-modal">Ajouter une photo</button>
+			<p title="Vous allez supprimer toute la gallery!!!">Supprimer la galerie</p>
+		</div>
+		<!--second page-->
+		<div id="two-page">
+			<h2 class="modal-title">Ajout photo</h2>
+			<form id="modal-form" method="post" action="http://localhost:5678/api/works"></form>
+		</div>
+	</div>
+</aside>
 <script src="./JS/app.js"></script>
 <script src="./JS/login.js"></script>
 </body>

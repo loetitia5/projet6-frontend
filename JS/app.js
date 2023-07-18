@@ -20,12 +20,11 @@ async function fetchWorks() {
   return data;
 }
 fetchWorks().then(works => {
-  console.log(works);
+  console.log(works); 
   fetchWorksDisplayGallery(works, '.gallery');
   displayFilters(works);
-  filterWorks('event');
-  deleteClass();
-  viewAllWorks();
+  
+
   })
 
   // Fonction d’affichage de la galerie de la page d’accueil ou du mode
@@ -103,8 +102,12 @@ async function fetchCategories() {
 }
 fetchCategories().then(categories => {
   console.log(categories);
-  categories.forEach((category) => {
+  categories.forEach((category) => { 
+    filterWorks('event');
     createElementbutton('classNames','textContent');
+    deleteClass();
+    viewAllWorks();
+    setDisplayStyle('element', 'displayValue'); 
 
     const filter = document.createElement("li");
     filter.innerText = category.name;
@@ -142,9 +145,13 @@ fetchCategories().then(categories => {
   })
 } 
 
+//modifier la valeur d'affichage 
+function setDisplayStyle(element, displayValue) {
+  element.style.display = displayValue;
+}
 //fonction pour créer un bouton
 function createElementbutton(classNames = [], textContent = "") {
-  const button =document.createElement("div"); 
+  const button = document.createElement("div"); 
   button.setAttribute("role", "button");
 
   if (Array.isArray(classNames)) {
@@ -160,7 +167,14 @@ function createElementbutton(classNames = [], textContent = "") {
   return button;
 }
 
- 
+// créer une icone
+function createIcon(...classNames) {
+  const icon = document.createElement("i");
+  classNames.forEach(className => {
+    icon.classList.add(className);
+  });
+  return icon;
+}
 //fonction pour filter et afficher par catégories les projets
 function filterWorks(event) {
   const buttonFilterId = event.target.getAttribute(id);
@@ -174,3 +188,12 @@ function filterWorks(event) {
     work.style.display = work.dataset.category === buttonFilterId ? "block" : "none";
   })
 } 
+
+//fonction permettant de rafraichir la galerie
+function freshGallery(selector) {
+  const gallery = document.querySelector(selector);
+  if(gallery) {
+    gallery.innerHTML = '';
+    fetchWorksDisplayGallery(selector);
+  }
+}
