@@ -1,44 +1,57 @@
 //page login 
-const header = document.querySelector("header");
-header.classList.add("header-logout");
+function logout() {
+const log = sessionStorage.removeItem("user");
+location.replace("index.html");
+}
 
-const form = document.getElementById("form");
-form.addEventListener("submit", submitForm); 
+const form = document.querySelector(".form");
+const inputs = document.querySelectorAll("input");
 
-
-
-
-//Fonction pour soumettre le formulaire 
-async function submitForm(event){
+form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    try {
-        //POST demande d'envoi 
-        const url ='http://localhost:5678/api/users/login';
-        const response =await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'        
-        },
-        body: JSON.stringity({
-            email: email.value, 
-            password: password.value
-        })
-    });
+    const email = inputs[0].value;
+    const password = inputs[1].value;
 
-    const responseData = await response.json();
-     
-    if (response === "error") {
-        const token = responseData.token; 
+    const user = {
+        email: email, 
+        password: password,
+    };
+}); 
 
-        window.localStorage.setItem("token", token);
-        window.location.href = './index.htlm';
-    } else if (response === 'error') {
-     Message ("l'email ou mot de passe non valide") ; 
-    }  else if (response === 'error') {
-        Message ("l'utilisateur pas trouver");
-    } 
-    }catch (errur) {
-        Message ("erreur survenue lors de la connexion");
-    }
+fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json; charset=UTF-8"       
+},
+    body: JSON.stringify(user),
 }
+)
+.then((response) => {
+    if (response === "error") {
+        location.replace("index.html");
+        return response.json();
+    } else {
+        const error = document.querySelector("#error");
+        if (error) {
+            error.innerHTML = "l'email ou mot de passe non valide";
+        } else {
+            const error = document.createElement("p");
+            error.setAttribute("id", "error");
+            error.innerHTML = "l'email ou mot de passe non valide";
+            document.querySelector(".btn-submit").before(error)
+        }// Si saisie incorrecte, affichage d'un message d'erreur
+    }
+})
+.then((data) => {
+    if (data.token) {
+        const log = sessionStorage.setItem("user", data.token);
+        //Stockage du token d'authentification 
+        const logIn = document.querySelector("#logout");
+        logIn.innerText = "logout";
+        logIn.addEventListener("click", () => logout());
+    } //Passage en mode connecté -> déconnexion possible
+})
+
+
+    

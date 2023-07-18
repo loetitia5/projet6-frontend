@@ -24,6 +24,8 @@ fetchWorks().then(works => {
   fetchWorksDisplayGallery(works, '.gallery');
   displayFilters(works);
   filterWorks('event');
+  deleteClass();
+  viewAllWorks();
   })
 
   // Fonction d’affichage de la galerie de la page d’accueil ou du mode
@@ -43,7 +45,7 @@ function fetchWorksDisplayGallery(works, targetElement) {
       img.alt = jsonWork.title;
         
       figure.appendChild(img);
-      //Si l'élément cibré est la galerie, créer l'élément figcaption avec son title associé
+      //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé
       if(targetElement === 'gallery') {
         const figcaption = document.createElement('figcaption');
         figcaption.textContent = jsonWork.title;
@@ -102,6 +104,8 @@ async function fetchCategories() {
 fetchCategories().then(categories => {
   console.log(categories);
   categories.forEach((category) => {
+    createElementbutton('classNames','textContent');
+
     const filter = document.createElement("li");
     filter.innerText = category.name;
     filter.classList.add("li");
@@ -118,7 +122,6 @@ fetchCategories().then(categories => {
   //fonction pour créer un bouton, y appliquer une ou plusieurs classes et inserer un texte
   
   });
-  createElementbutton('classNames','textContent');
   
 });
 
