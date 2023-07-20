@@ -4,6 +4,8 @@ const buttonFilters = document.querySelectorAll(".filter");
 const filter = document.querySelector("#filter");
 const works = document.querySelectorAll(".work");
 
+//Récupérer tous les filtres et tâches 
+const filterAll = buttonFilters[0];
 //Récupérer les données de l'API "works"
 const filters = document.querySelectorAll(".filter");
 
@@ -67,8 +69,30 @@ function fetchWorksDisplayGallery(works, targetElement) {
     });
    
 }
+  //supprimer la classe "filter_active" de tous les filtres
+  function deleteClass() {
+    const buttonFilters = document.querySelectorAll(".filter");
+    buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
+  }
+  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
+function viewAllWorks() {
 
+  //cliqueant sur le filtre "tous", tous les projets sont affichées
+  filterAll.addEventListener("click", viewAllWorks);
+  // Parcourir tous les filters, à l'exception du fitre "tous"
+  buttonFilters.forEach(buttonFilter => {
+    if (buttonFilter !== filterAll) {
+      buttonFilter.addEventListener("click", (event) => { filterWorks(event)})
+    }
+  });
+   //Afficher tous les projets 
+   works.forEach(work => work.style.display = "block");
+   deleteCLass();
+   //Ajouter la classe "filter_active" au filtre "All"
+   filterAll.classList.add("filter_active");
 
+  
+}
 //récupérer des données de l'API "catégories"
 /*
 fetch ('http://localhost:5678/api/categories')
@@ -103,8 +127,7 @@ fetchCategories().then(categories => {
       const filter = document.createElement('button');
       filter.classList.add('button_filter');
     }
-  //fonction pour filter et afficher par catégories les projets
-
+  
   });
   
 });
@@ -165,7 +188,20 @@ function createIcon(...classNames) {
   });
   return icon;
 } 
+//fonction pour filter et afficher par catégories les projets
+function filterWorks(id) {
+  const buttonFilterId = id.getAttribute("id");
+  deleteClass(); 
+  //Ajouter la class"filter_active" au filtre "all"
+  filterAll.classList.add("filter_active"); 
 
+  //Récupérer tous les travaux  
+  const works = document.querySelectorAll(".work");
+  works.forEach(work => {
+    work.style.display = work.dataset.category === buttonFilterId ? "block" : "none";
+  })
+
+} 
 
 //fonction permettant de rafraichir la galerie
 function freshGallery(selector) {
