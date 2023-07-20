@@ -56,39 +56,19 @@ function fetchWorksDisplayGallery(works, targetElement) {
         figcaption.textContent ='éditer';
         figure.appendChild(figcaption);
 
+        // récuperer l'identifiant
         const idWork = jsonWork.id;
+        //fonction d'appel pour afficher le button supprimer
+        buttonDelete(figure, idWork);
+        buttonHover(figure);
       }
       //ajouter la figure créer a la galerie 
       galleryElement.appendChild(figure);
     });
    
 }
-  //supprimer la classe "filter_active" de tous les filtres
-  function deleteClass() {
-    const buttonFilters = document.querySelectorAll(".filter");
-    buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
-  }
-  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
-function viewAllWorks() {
-  //Récupérer tous les filtres et tâches 
-  const filterAll = buttonFilters[0];
 
-  //cliqueant sur le filtre "tous", tous les projets sont affichées
-  filterAll.addEventListener("click", viewAllWorks);
-  // Parcourir tous les filters, à l'exception du fitre "tous"
-  buttonFilters.forEach(buttonFilter => {
-    if (buttonFilter !== filterAll) {
-      buttonFilter.addEventListener("click", (event) => { filterWorks(event)})
-    }
-  });
-   //Afficher tous les projets 
-   works.forEach(work => work.style.display = "block");
-   deleteCLass();
-   //Ajouter la classe "filter_active" au filtre "All"
-   filterAll.classList.add("filter_active");
 
-  
-}
 //récupérer des données de l'API "catégories"
 /*
 fetch ('http://localhost:5678/api/categories')
@@ -108,7 +88,8 @@ fetchCategories().then(categories => {
     deleteClass();
     viewAllWorks();
     setDisplayStyle('element', 'displayValue'); 
-
+    const sort = works.filter(id => id.length > works);
+    console.log(sort);
     const filter = document.createElement("li");
     filter.innerText = category.name;
     filter.classList.add("li");
@@ -122,8 +103,8 @@ fetchCategories().then(categories => {
       const filter = document.createElement('button');
       filter.classList.add('button_filter');
     }
-  //fonction pour créer un bouton, y appliquer une ou plusieurs classes et inserer un texte
-  
+  //fonction pour filter et afficher par catégories les projets
+
   });
   
 });
@@ -131,19 +112,28 @@ fetchCategories().then(categories => {
   // Fonction d’affichage des filtres 
   function displayFilters(works) {
     const filters = document.getElementById("filters");
-         
-        // Ajouter le filtre "Tous" en premier dans la liste des filtres
-        filters.innerHTML += `<li class="filter" id="0">Tous</li>`;
-        //création d'une liste de catérories en triant les catégories
-        const categoryList = Array.from(new Set(works.map(jsonWork => jsonWork.categoryId)));
-        console.log(categoryList);
+    
+    const liste = document.createElement("li");
+    liste.classList.add("filter");
+    liste.innerText = "Tous";
+    liste.setAttribute("id", "0");
+    // Ajouter le filtre "Tous" en premier dans la liste des filtres
+    filters.appendChild(liste);
+    //création d'une liste de catérories en triant les catégories
+    const categoryList = Array.from(new Set(works.map(jsonWork => jsonWork.categoryId)));
+    console.log(categoryList);
 
-        //trouve le premier element dans le tableau
-        categoryList.forEach(categoryId => {
-        const categoryName = works.find(work => work.categoryId === categoryId).category.name;
-        filters.innerText = `<li class="filter" id="${categoryId}">${categoryName}</li>`;
-  })
+    //trouve le premier element dans le tableau
+    categoryList.forEach(categoryId => {
+      const categoryName = works.find(work => work.categoryId === categoryId).category.name;
+      const listCategory = document.createElement("li");
+      listCategory.classList.add("filter");
+      listCategory.innerText = categoryName;
+      listCategory.setAttribute("id", categoryId);
+      filters.appendChild(listCategory);
+    })
 } 
+
 
 //modifier la valeur d'affichage 
 function setDisplayStyle(element, displayValue) {
@@ -174,20 +164,8 @@ function createIcon(...classNames) {
     icon.classList.add(className);
   });
   return icon;
-}
-//fonction pour filter et afficher par catégories les projets
-function filterWorks(event) {
-  const buttonFilterId = event.target.getAttribute(id);
-  deleteClass();
-  //Ajouter la class"filter_active" au filtre "all"
-  filterAll.classList.add("filter_active");
-
-  //Récupérer tous les travaux  
-  const works = document.querySelectorAll(".work");
-  works.forEach(work => {
-    work.style.display = work.dataset.category === buttonFilterId ? "block" : "none";
-  })
 } 
+
 
 //fonction permettant de rafraichir la galerie
 function freshGallery(selector) {
