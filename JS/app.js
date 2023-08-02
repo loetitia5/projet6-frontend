@@ -188,15 +188,14 @@ function filterProjet(gallery, doFilter) {
   const image = document.querySelectorAll("#filter");
   const galleryElement = document.querySelector('.gallery');
   for(doFilter = 1; doFilter < 12; doFilter++ ) {
-    console.log("test");
-  let tag = math.floor();
+  let tag = this.id;
  
   for(const gallery of image){
   gallery.classList.replace("doFilter", "works");
     if(tag in gallery.dataset){
       gallery.classList.replace("doFilter", "works");
       }
-    } 
+    }     console.log("test");
   }
 }
 
