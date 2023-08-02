@@ -1,5 +1,5 @@
 //page login 
-
+/*
 function logout() {
 const log = sessionStorage.removeItem("user");
 location.replace("index.html");

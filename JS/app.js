@@ -1,4 +1,4 @@
-const galleryElement = document.querySelector('.gallery');
+const galleryElement = document.querySelector('.gallery'); 
 const filterList = Array.from;
 const buttonFilters = document.querySelectorAll(".filter");
 const filter = document.querySelector("#filter");
@@ -86,9 +86,7 @@ function viewAllWorks() {
   //Afficher tous les projets 
   works.forEach(work => work.style.display = "block");
   deleteClass();
-  //Ajouter la classe "filter_active" au filtre "All"
-  filterAll.classList.add("filter_active");
-
+  
   //cliqueant sur le filtre "tous", tous les projets sont affichées
   filterAll.addEventListener("click", viewAllWorks);
   // Parcourir tous les filters, à l'exception du fitre "tous"
@@ -184,23 +182,24 @@ function doFilter() {
   filterAppartement.addEventListener("click", filterProjet, false);
   const filterHotel = document.querySelector("#projet-3");
   filterHotel.addEventListener("click", filterProjet, false);
+  return filterAppartement;
 } 
 function filterProjet(gallery, doFilter) {  
   const image = document.querySelectorAll("#filter");
-  const galleryElement = document.querySelector('.gallery');
-  for(doFilter = 1; doFilter < 12; doFilter++ ) {
+  
+  for(works of image ) {
   let tag = this.id;
  
   for(const gallery of image){
-  gallery.classList.replace("doFilter", "works");
-    if(tag in gallery.dataset){
-      gallery.classList.replace("doFilter", "works");
-      }
-    }     console.log("test");
+    gallery.classList.replace("doFilter", "works");
+      if(tag in gallery.dataset){
+        gallery.classList.replace("doFilter", "works");
+        }
+    }    
   }
 }
 
-  console.log(filterProjet, doFilter);
+  console.log(filterProjet);
 
 
 /*
