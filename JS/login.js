@@ -1,7 +1,7 @@
 //page login 
-/*
+
 function logout() {
-const log = sessionStorage.removeItem("userId");
+const log = sessionStorage.removeItem("user");
 location.replace("index.html");
 }
 
@@ -19,10 +19,10 @@ form.addEventListener("submit", (event) => {
         password: password,
     };
 }); 
-*/ 
+
 async function fetchlogin() {
     const reponse = await ('http://localhost:5678/api/users/login');
-    const data = await fetch( URL, init);
+    const data = await fetch( init,  URL);
     return data;
 }
 fetchlogin().then(response => {
@@ -57,7 +57,7 @@ const init = {
     headers: {
         "Content-Type": "application/json; charset=UTF-8" 
     },
-    body: JSON.stringify(userId),
+    body: JSON.stringify(user),
 };   
 /*
 let myRequest = new Request('http://localhost:5678/api/users/login', init); 

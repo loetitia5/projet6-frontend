@@ -7,6 +7,7 @@ const buttonFilterId = Array.from("event");
 
 //Récupérer tous les filtres et tâches 
 const filterAll = buttonFilters[0];
+
 //Récupérer les données de l'API "works"
 const filters = document.querySelectorAll(".filter");
 
