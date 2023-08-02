@@ -26,7 +26,8 @@ fetchWorks().then(works => {
   console.log(works); 
   fetchWorksDisplayGallery(works, '.gallery');
   displayFilters(works);
-
+  doFilter();
+  filterProjet(doFilter);
 
   })
 
@@ -48,10 +49,12 @@ function fetchWorksDisplayGallery(works, targetElement) {
         
       figure.appendChild(img);
       //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé
-      if(targetElement === 'gallery') {
+      if(targetElement === '.gallery') {
+        
         const figcaption = document.createElement('figcaption');
         figcaption.textContent = jsonWork.title;
         figure.appendChild(figcaption);
+        
       }
       //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
       if(targetElement === '#modal-gallery') {
@@ -69,7 +72,7 @@ function fetchWorksDisplayGallery(works, targetElement) {
       galleryElement.appendChild(figure);
     });
    
-}
+} /*
   //supprimer la classe "filter_active" de tous les filtres
 function deleteClass() {
   const buttonFilters = document.querySelectorAll(".filter");
@@ -94,13 +97,13 @@ function viewAllWorks() {
     }
   });
  
-}
+}*/
 //récupérer des données de l'API "catégories"
 /*
 fetch ('http://localhost:5678/api/categories')
 .then((categories) => categories.json())
 .then((data) => console.log(data));
-*/
+*//*
 async function fetchCategories() {
   const reponse = await fetch ('http://localhost:5678/api/categories');
   const data = await reponse.json();
@@ -123,8 +126,8 @@ fetchCategories().then(categories => {
     filter.addEventListener("click", async () => {
       const filterData = categories.filter(
         (data) => data.categoryId === category.id);
-    /*  renderGallery(filterData);*/
-    });
+    /*  renderGallery(filterData);*//*
+    });*//*
     function addElement() {
       const filter = document.createElement('button');
       filter.classList.add('button_filter');
@@ -133,8 +136,8 @@ fetchCategories().then(categories => {
     function filterWorks(event) {
       deleteClass(); 
       this.Array = event;
-      //Ajouter la class"filter_active" au filtre "all"
-      filterAll = document.getElementsByName(filter_active); 
+     
+      filterAll = document.getElementsByName(filterWorks); 
 
     //Récupérer tous les travaux  
       const works = document.querySelectorAll(".work");
@@ -144,7 +147,7 @@ fetchCategories().then(categories => {
     } 
   });
   
-});
+});*/
 
 // Fonction d’affichage des filtres 
 function displayFilters(works) {
@@ -153,7 +156,7 @@ function displayFilters(works) {
   const liste = document.createElement("li");
   liste.classList.add("filter");
   liste.innerText = "Tous";
-  liste.setAttribute("id", "0");
+  liste.setAttribute("id", "projet-0");
   // Ajouter le filtre "Tous" en premier dans la liste des filtres
   filters.appendChild(liste);
   //création d'une liste de catérories en triant les catégories
@@ -166,17 +169,48 @@ function displayFilters(works) {
     const listCategory = document.createElement("li");
     listCategory.classList.add("filter");
     listCategory.innerText = categoryName;
-    listCategory.setAttribute("id", categoryId);
+    listCategory.setAttribute("id", "projet-"+ categoryId);
     filters.appendChild(listCategory);
   })
 } 
+// fonction pour récupérer les boutons 
+function doFilter() {
+  const filterTous = document.querySelector("#projet-0");
+  filterTous.addEventListener("click", filterProjet, false);
+  const filterObjet = document.querySelector("#projet-1");
+  filterObjet.addEventListener("click", filterProjet, false);
+  const filterAppartement = document.querySelector("#projet-2");
+  filterAppartement.addEventListener("click", filterProjet, false);
+  const filterHotel = document.querySelector("#projet-3");
+  filterHotel.addEventListener("click", filterProjet, false);
+} 
+function filterProjet(gallery, doFilter) {  
+  const image = document.querySelectorAll("#filter");
+  const galleryElement = document.querySelector('.gallery');
+  for(doFilter = 1; doFilter < 12; doFilter++ ) {
+    console.log("test");
+  let tag = math.floor();
+ 
+  for(const gallery of image){
+  gallery.classList.replace("doFilter", "works");
+    if(tag in gallery.dataset){
+      gallery.classList.replace("doFilter", "works");
+      }
+    } 
+  }
+}
+
+  console.log(filterProjet, doFilter);
 
 
+/*
 //modifier la valeur d'affichage 
 function setDisplayStyle(element, displayValue) {
   element.style.display = displayValue;
-}
-//fonction pour créer un bouton
+}*/
+
+//fonction pour créer un bouton 
+/*
 function createElementbutton(classNames = [], textContent = "") {
   const button = document.createElement("div"); 
   button.setAttribute("role", "button");
@@ -226,4 +260,4 @@ function errorMessage(message, selector) {
   errorDuMessage.innerHTML = message;
 
   containerError.appendChild(errorDuMessage);
-}
+} */
