@@ -27,8 +27,7 @@ fetchWorks().then(works => {
   console.log(works); 
   fetchWorksDisplayGallery(works, '.gallery');
   displayFilters(works);
-  doFilter();
-  filterProjet(doFilter);
+  doFilter(works);
 
   })
 
@@ -73,7 +72,17 @@ function fetchWorksDisplayGallery(works, targetElement) {
       galleryElement.appendChild(figure);
     });
    
-} /*
+} 
+//fonction pour supprimer les noeuds
+function cleanup() {
+  const galleryElement = document.querySelector(".gallery");
+  let child = galleryElement.lastElementChild; 
+  while(child) {
+    galleryElement.removeChild(child);
+    child = galleryElement.lastElementChild;
+  }
+}
+/*
   //supprimer la classe "filter_active" de tous les filtres
 function deleteClass() {
   const buttonFilters = document.querySelectorAll(".filter");
@@ -173,35 +182,46 @@ function displayFilters(works) {
   })
 } 
 // fonction pour récupérer les boutons 
-function doFilter() {
+function doFilter(works) {
   const filterTous = document.querySelector("#projet-0");
-  filterTous.addEventListener("click", filterProjet, false);
+  console.log(filterTous);
+  filterTous.addEventListener("click", function(){
+    filterProjet(works, 0);
+  }, false);
+
   const filterObjet = document.querySelector("#projet-1");
-  filterObjet.addEventListener("click", filterProjet, false);
+  filterObjet.addEventListener("click", function(){
+    filterProjet(works, 1);
+  }, false);
+
   const filterAppartement = document.querySelector("#projet-2");
-  filterAppartement.addEventListener("click", filterProjet, false);
+  filterAppartement.addEventListener("click", function(){
+    filterProjet(works, 2);
+  }, false);
+
   const filterHotel = document.querySelector("#projet-3");
-  filterHotel.addEventListener("click", filterProjet, false);
-  return filterAppartement;
+  filterHotel.addEventListener("click", function(){
+    filterProjet(works, 3);
+  }, false);
+
 } 
-function filterProjet(gallery, doFilter) {  
-  const image = document.querySelectorAll("#filter");
-  
-  for(works of image ) {
-  let tag = this.id;
- 
-  for(const gallery of image){
-    gallery.classList.replace("doFilter", "works");
-      if(tag in gallery.dataset){
-        gallery.classList.replace("doFilter", "works");
-        }
-    }    
+//fonction d'afficher par catégories les projets
+function filterProjet(works,filter) {
+  if(filter == 0) {
+    cleanup();
+    fetchWorksDisplayGallery(works, ".gallery");
+  } else {
+    let tableauFilter = works.filter(function(projet){
+      return projet.categoryId == filter;
+    });
+    cleanup();
+    fetchWorksDisplayGallery(tableauFilter, ".gallery");
   }
 }
 
-  console.log(filterProjet);
-
-
+function test() {
+  console.log("ca marche");
+}
 /*
 //modifier la valeur d'affichage 
 function setDisplayStyle(element, displayValue) {

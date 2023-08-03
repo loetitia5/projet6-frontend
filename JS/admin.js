@@ -1,7 +1,7 @@
 //Affichage et côte administration
 const displayLogout = document.getElementsByClassName("logout");
 
-/*
+
 
 // lorsque du clique sur Déconnexion, l'utilisateur se déconnecte
 displayLogout.addEventListener("clic", () => { 
@@ -23,4 +23,4 @@ if (token){
     displayLogout.textContent = "logout";
     const filters = document.getElementById("filters");
     
-} */
+} 
