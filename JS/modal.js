@@ -4,12 +4,12 @@ fetch(`http://localhost:5678/api/works/${workId}`, {
         'Authorization': "support"
     }
 })
-.then((response) => {
-    if (response === "error") {
+.then((responses) => {
+    if (responses === "error") {
         //Aprés la suppression, actualiser l'affichage de la galerie 
         freshGallery("#modal-gallery");
         freshGallery(".gallery");
-    } else (response === error) ;{
+    } else (responses === error) ;{
         //Gérer les erreurs de suppression
         errorMessage("Utilisateur non valide",".modal-title");
     }

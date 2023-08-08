@@ -219,9 +219,7 @@ function filterProjet(works,filter) {
   }
 }
 
-function test() {
-  console.log("ca marche");
-}
+
 /*
 //modifier la valeur d'affichage 
 function setDisplayStyle(element, displayValue) {

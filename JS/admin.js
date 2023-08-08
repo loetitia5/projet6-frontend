@@ -1,8 +1,6 @@
 //Affichage et côte administration
 const displayLogout = document.getElementsByClassName("logout");
 
-
-
 // lorsque du clique sur Déconnexion, l'utilisateur se déconnecte
 displayLogout.addEventListener("clic", () => { 
     window.localStorage.removeItem("token");
@@ -21,6 +19,5 @@ window.addEventListener('unload', () => {
 //affichage des éléments coté admin si token present
 if (token){ 
     displayLogout.textContent = "logout";
-    const filters = document.getElementById("filters");
-    
+    const filters = document.getElementById("filters");  
 } 
