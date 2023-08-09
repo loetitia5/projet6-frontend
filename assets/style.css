@@ -130,6 +130,19 @@ nav li a:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+.positionModal{
+	display: flex;
+	gap: 10px;
+	padding-top: 10px;
+	cursor: pointer;
+}
+.positionModal i {
+	font-size: 15px;
+}
+#directionModal {
+	display: flex;
+	gap: 30px;
+}
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;

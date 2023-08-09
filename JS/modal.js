@@ -1,5 +1,30 @@
 //Masquer la deuxieme page 
 secondPageModal('none');
+//classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
+createCloseButton();
+const elements = document.querySelectorAll("#directionModal .positionModal, overlay"); 
+elements.forEach(element => {
+    element.classList.add('modal-trigger')
+});
+//récupérer toute la classe madal-trigger
+const trigger = document.querySelectorAll("modal-trigger");
+//parcourir les differentes classes et en cliquant sur l'une d'entre elles
+trigger.forEach(triggers =>triggers.addEventListener("click", toogleModal))
+
+function toogleModal() {
+    const modal = document.getElementById("modal");
+    modal.classList.toggle("active");
+
+    const elementModal = document.querySelector(".wrapper");
+    //pour scoller de haut en bas
+    elementModal.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+fetchWorksDisplayGallery("#modal-gallery");
+//clique sur le bouton, ajouter l'affichage de la deuxieme page
+const buttonPhoto = document.querySelector("btn-modal");
+buttonPhoto.addEventListener('click', pageSecondModal);
+
+
 //fonction pour créer le bouton de fermeture de la fenêtre
 function createCloseButton() {
     const closeButton = createButtonElement(["modal-close", "modal-trigger"]);
@@ -49,11 +74,11 @@ function pageFristModal() {
 
 
 //supprimer un projet
-function workDelete(workId) {
+function workDelete(idWork) {
 const token = window.localStorage.getItem('token');
 
 //demande Delete à l'API
-fetch(`http://localhost:5678/api/works/${workId}`, {
+fetch(`http://localhost:5678/api/works/${idWork}`, {
     method: 'DELETE',
     headers: {
         'Authorization' : `Bearer ${token}`,
@@ -74,10 +99,21 @@ fetch(`http://localhost:5678/api/works/${workId}`, {
 }
 
 //Fonction pour afficher une icone de suppression 
-function deteleButton(figure , workId) {
+function deleteButton(figure , idWork) {
     const buttonDelete = createElementbutton(['delete-button']);
     const iconDelete = createElementIcon("fa-solid");
     buttonDelete.style.cursor = 'pointer';
     buttonDelete.appendChild(iconDelete);
     figure.appendChild(buttonDelete);
+
+//button de confirmation apparaît avant la suppression
+    deleteButton.addEventListener('click', () => {
+        const confirmDelete = createButtonElement(['confirm-delete'], "Confirmer suppression");
+        confirmDelete.addEventListener("click", function() {
+            workDelete(idWork);
+            figure.removeChild(confirmDelete);
+        });
+        figure.appendChild(confirmDelete);
+    });
+    return deleteButton
 }
