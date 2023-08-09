@@ -11,8 +11,28 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	
+<!--Modale-->
+<aside id="modal" class="modal" aria-hidden="true" role="dialog" >
+	<div class="overlay"></div>
+	<div class="wrapper">
+		<!--premiere page-->
+		<div id="frist-page">
+			<h2 class="modal-title">Galerie Photo</h2>
+			<div id="modal-gallery"></div>
+			<button class="btn-modal">Ajouter une photo</button>
+			<p title="Vous allez supprimer toute la gallery!!!">Supprimer la galerie</p>
+		</div>
+		<!--seconde page-->
+		<div id="two-page">
+			<h2 class="modal-title">Ajout photo</h2>
+			<form id="modal-form" method="post" action="http://localhost:5678/api/works"></form>
+		</div>
+	</div>
+</aside>
+
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a href="#portfolio">projets</a></li>
@@ -35,7 +55,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="directionmodal"><h2>Mes Projets</h2></div>
 		<ul id="filters"></ul>
 		<div class="gallery"></div>
 	</section>
@@ -62,24 +82,6 @@
 	</nav>
 </footer>
 
-<!--Modale-->
-<aside id="modal" class="modal">
-	<div class="overlay"></div>
-	<div class="wrapper">
-		<!--first page-->
-		<div id="frist-page">
-			<h2 class="modal-title">Galerie Photo</h2>
-			<div id="modal-gallery"></div>
-			<button class="btn-modal">Ajouter une photo</button>
-			<p title="Vous allez supprimer toute la gallery!!!">Supprimer la galerie</p>
-		</div>
-		<!--second page-->
-		<div id="two-page">
-			<h2 class="modal-title">Ajout photo</h2>
-			<form id="modal-form" method="post" action="http://localhost:5678/api/works"></form>
-		</div>
-	</div>
-</aside>
 <script src="./JS/app.js"></script>
 <script src="./JS/admin.js"></script>
 <script src="./JS/login.js"></script>
