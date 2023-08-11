@@ -1,5 +1,5 @@
 //Masquer la deuxieme page 
-secondPageModal('none');
+/*secondPageModal('none');
 //classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
 createCloseButton();
 const elements = document.querySelectorAll("#directionModal .positionModal, overlay"); 
@@ -27,9 +27,9 @@ buttonPhoto.addEventListener('click', pageSecondModal);
 
 //fonction pour créer le bouton de fermeture de la fenêtre
 function createCloseButton() {
-    const closeButton = createButtonElement(["modal-close", "modal-trigger"]);
+    const closeButton = doFilter(["modal-close", "modal-trigger"]);
 
-    const iconClose = createIconElement("fa-solid", "fa-xmark");
+    const iconClose = filterProjet("fa-solid", "fa-xmark");
 
     document.querySelector(".wrapper").appendChild(closeButton);
     closeButton.appendChild(iconClose);
@@ -38,9 +38,9 @@ function createCloseButton() {
 
 //fonction pour créer le bouton précedent de la fenêtre
 function createButton() {
-    const buttonModal = createButtonElement(['modal-button']);
+    const buttonModal = doFilter(['modal-button']);
 
-    const iconModal = createIconElement("fa-solid", "fa-arrow-left-long");
+    const iconModal = filterProjet("fa-solid", "fa-arrow-left-long");
     buttonModal.appendChild(iconModal);
 
     document.getElementById("two-page").appendChild(buttonModal);
@@ -100,15 +100,15 @@ fetch(`http://localhost:5678/api/works/${idWork}`, {
 
 //Fonction pour afficher une icone de suppression 
 function deleteButton(figure , idWork) {
-    const buttonDelete = createElementbutton(['delete-button']);
-    const iconDelete = createElementIcon("fa-solid");
+    const buttonDelete = doFilter(['delete-button']);
+    const iconDelete = filterProjet("fa-solid");
     buttonDelete.style.cursor = 'pointer';
     buttonDelete.appendChild(iconDelete);
     figure.appendChild(buttonDelete);
 
 //button de confirmation apparaît avant la suppression
     deleteButton.addEventListener('click', () => {
-        const confirmDelete = createButtonElement(['confirm-delete'], "Confirmer suppression");
+        const confirmDelete = doFilter(['confirm-delete'], "Confirmer suppression");
         confirmDelete.addEventListener("click", function() {
             workDelete(idWork);
             figure.removeChild(confirmDelete);
@@ -117,3 +117,4 @@ function deleteButton(figure , idWork) {
     });
     return deleteButton
 }
+*/

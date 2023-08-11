@@ -259,11 +259,25 @@ nav li a:hover {
 	font-size: 9px;
 	right: 6px;
 }
-
+.confirm-delete{
+	position: absolute;
+    top: 30%;
+    border-radius: 10px;
+    background: black;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 10px;
+	text-align: center;
+}
 #two-page {
 	width: 77%;
 }
-
+#two-page p{
+	font-family: 'Syne';
+	color: #B1663C;
+	cursor: pointer;
+}
 #contact {
 	width: 50%;
 margin: auto;

@@ -4,8 +4,8 @@ const displayLogout = document.getElementsByClassName("logout");
 // lorsque du clique sur Déconnexion, l'utilisateur se déconnecte
 displayLogout.addEventListener("clic", () => { 
     window.localStorage.removeItem("token");
-    //rediriger vers la page d'accueil hors ligne 
-    window.location.href = "./index.html";
+    //rediriger vers la page login hors ligne 
+    window.location.href = "./login.html";
 });
 
 // Récupération du token
