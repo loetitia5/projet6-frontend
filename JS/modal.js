@@ -72,8 +72,8 @@ function pageFristModal() {
     firstPageModal('flex');
     secondPageModal('none');
 };
-
-
+//affichage gallery
+fetchWorksDisplayGallery();
 //supprimer un projet
 function workDelete(idWork) {
 const token = window.localStorage.getItem('token');
