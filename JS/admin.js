@@ -1,12 +1,7 @@
 //Affichage et côte administration
-const displayLogout = document.getElementsByClassName("logout");
+const displayLogout = document.getElementById("logout");
+console.log(displayLogout);
 
-// lorsque du clique sur Déconnexion, l'utilisateur se déconnecte
-displayLogout.addEventListener("clic", () => { 
-    window.localStorage.removeItem("token");
-    //rediriger vers la page login hors ligne 
-    window.location.href = "./login.html";
-});
 
 // Récupération du token
 const token = window.localStorage.getItem("token");
@@ -18,6 +13,21 @@ window.addEventListener('unload', () => {
 
 //affichage des éléments coté admin si token present
 if (token){ 
-    displayLogout.textContent = "logout";
-    const filters = document.getElementById("filters");  
-} 
+    displayLogout.firstElementChild.textContent = "logout";
+    // lorsque du clique sur Déconnexion, l'utilisateur se déconnecte
+    displayLogout.addEventListener("clic", () => {
+        window.localStorage.removeItem("token");
+        //rediriger vers la page login hors ligne 
+        window.location.href = "./login.html";
+    });
+
+    
+    const changement = document.createElement("div");
+    const newBtn = document.createElement("button");
+    const btnText = document.createTextNode("publier les changements");
+    changement.appendChild(newBtn);
+    const head = document.getElementById("header");
+    head.insertBefore(changement, head.children[0]);
+} else {
+    
+}

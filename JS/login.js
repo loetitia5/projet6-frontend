@@ -16,17 +16,18 @@ async function controle(event) {
     });
     const responseData = await response.json();
     console.log(responseData);
+    const token = responseData.token; 
     //Vérifier le code
-    if (responseData !== 404) {
+   if(token) {
         //Enregistrement du token et redirection vers la page d'accueil
-        window.localStorage.setItem("token", controle);
+        window.localStorage.setItem("token", token);
         window.location.href = './index.html';
-    } else(responseData === 404) ;{
+        
+    } else {
         alert("L'email ou et le mot de passe n'est pas valide");
-    } if (responseData === "erreur") {
-        alert("Une erreur est survenue lors de la connexion")
-    }
+    } 
 }
+
 const btn = document.getElementById("submit");
 btn.addEventListener("click", controle);
 

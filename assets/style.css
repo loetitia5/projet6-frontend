@@ -63,6 +63,9 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+#header div{
+	background-color: black;
+}
 section {
 	margin: 50px 0
 }

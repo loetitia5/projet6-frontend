@@ -1,5 +1,6 @@
 //Masquer la deuxieme page 
-/*secondPageModal('none');
+
+secondPageModal('none');
 //classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
 createCloseButton();
 const elements = document.querySelectorAll("#directionModal .positionModal, overlay"); 
@@ -117,4 +118,3 @@ function deleteButton(figure , idWork) {
     });
     return deleteButton
 }
-*/
