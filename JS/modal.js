@@ -1,5 +1,4 @@
 //Masquer la deuxieme page 
-
 secondPageModal('none');
 //classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
 createCloseButton();

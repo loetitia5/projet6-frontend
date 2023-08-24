@@ -37,5 +37,3 @@ btn.addEventListener("click", controle);
 
 
 
-
-

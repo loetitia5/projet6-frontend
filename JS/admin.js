@@ -21,13 +21,14 @@ if (token){
         window.location.href = "./login.html";
     });
 
-    
+    /*
     const changement = document.createElement("div");
     const newBtn = document.createElement("button");
     const btnText = document.createTextNode("publier les changements");
     changement.appendChild(newBtn);
-    const head = document.getElementById("header");
-    head.insertBefore(changement, head.children[0]);
-} else {
-    
-}
+    const head = document.getElementsByTagName("header");
+    head[0].insertBefore(changement, head[0].children[0]);*/
+} else {}
+
+
+
