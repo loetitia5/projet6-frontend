@@ -11,6 +11,7 @@ window.addEventListener('unload', () => {
     window.localStorage.removeItem("token");
   });
 
+const barreLogins = document.getElementById('barreLogin');
 //affichage des éléments coté admin si token present
 if (token){ 
     displayLogout.firstElementChild.textContent = "logout";
@@ -19,9 +20,10 @@ if (token){
         window.localStorage.removeItem("token");
         //rediriger vers la page login hors ligne 
         window.location.href = "./login.html";
-    });
-
-    /*
+    });    
+    barreLogins.classList.remove("hidden");
+    
+    /*  
     const changement = document.createElement("div");
     const newBtn = document.createElement("button");
     const btnText = document.createTextNode("publier les changements");

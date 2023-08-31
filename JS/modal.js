@@ -1,3 +1,71 @@
+const myModal = document.getElementById("modal");
+
+const btnPublier = document.getElementById("buttonPublierPhoto");
+
+const closeModal = document.getElementById("close");
+
+btnPublier.addEventListener('click', () => {
+    myModal.ariaHidden = "false";
+    console.log(closeModal);
+})
+
+closeModal.addEventListener('click', () => {
+  console.log("click");
+});
+/*
+async function fetchWorks() {
+    const reponse = await fetch ('http://localhost:5678/api/works');
+    const data = await reponse.json();
+    return data;
+  }
+  fetchWorks().then(works => {
+    console.log(works); 
+    fetchWorksDisplayGallery(works, '#modal-gallery');
+  
+    });
+*/
+fetchWorksDisplayGallery(works, '#modal-gallery');
+/*
+window.onclick = function(event) {
+    if(event.target == myModal) {
+        myModal.style.display = "none";
+    }
+}*/
+/*
+document.addEventListener('DOMContentLoaded', () => {
+    const buttModals = document.querySelectorAll('[aria-haspopup="dialog"]');
+    const doc = document.querySelector('.barreLogin');
+
+    const open = function (dialog) {
+        dialog.setAttribute('aria-hidden', false);
+        doc.setAttribute('aria-hidden', true);
+      };
+    buttModals.forEach((buttModal) => {
+        const dialog = document.getElementById(buttModal.getAttribute('aria-controls'));
+
+        buttModal.addEventListener('click', (event) => {
+            event.preventDefault();
+      
+            open(dialog);
+
+      });
+    });
+});
+
+const btnClose = function(dialog) {
+    dialog.setAttribute('aria-hidden', true);
+    doc.setAttribute('aria-hidden', false);
+};
+
+const dismissButton = dialog.querySelectorAll('[data-dismiss]');
+dismissButton.forEach((dismissButtons) => {
+    const dismissDialog = document.getElementById(dismissButtons.dataset.dismiss);
+    dismissButtons.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        close(dismissDialog);
+    })
+})
 //Masquer la deuxieme page 
 secondPageModal('none');
 //classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
@@ -117,3 +185,5 @@ function deleteButton(figure , idWork) {
     });
     return deleteButton
 }
+
+*/

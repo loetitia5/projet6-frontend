@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -67,6 +68,10 @@ header {
 #header div{
 	background-color: black;
 	flex-direction: column;
+	
+}
+#headerLogin {
+	flex-direction: row;
 }
 .positionNav {
 	display: flex;
@@ -124,8 +129,9 @@ nav li a:hover {
     display: flex;
 	height: 59px;
 	align-items: center;
+	max-width: 1140px;
 }
-.barreLogin span {
+span.logoBarreLogin {
 	padding-right: 5px;
 }
 .txtMode {
@@ -167,7 +173,7 @@ nav li a:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
-}
+}/*
 .positionModal{
 	display: flex;
 	gap: 10px;
@@ -180,11 +186,13 @@ nav li a:hover {
 #directionModal {
 	display: flex;
 	gap: 30px;
-}
-#porfolio {
+}*/
+section#portfolio {
 	display: flex;
-    flex-direction: column;
-    align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
 }
 #portfolio h2 {
 	text-align: center;
@@ -233,8 +241,24 @@ nav li a:hover {
 
 
 /*								Modale					*/
-
-.modal,.modal-button,.delete-button{
+.hidden {
+	display: none;
+}
+.c-dialog {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    padding: 2.4rem;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgba(black, .75);
+    transition: .2s;
+}
+.modal, .delete-button{
 	display: flex;
 	justify-content: center;
 }
@@ -244,10 +268,14 @@ nav li a:hover {
 	left: 0;
 	width: 100%;
 	/*display: none;*/
-}
+} 
 .modal:active {
 	display: block;
 }
+.c-dialog[aria-hidden="true"] {
+	visibility: hidden;
+	opacity: 0;
+} 
 .overlay{
 	position: fixed;
 	top: 0;
@@ -258,8 +286,7 @@ nav li a:hover {
 }
 .wrapper {
 	position: relative;
-	top: 950px;
-	left: 50%;
+	top: 660px;
 	justify-content: center;
 	width: 630px;
 	max-height: 730px;
@@ -267,6 +294,11 @@ nav li a:hover {
 	background: #FFFFFF;
 	border-radius: 10px;
 	transform: translate(-50px,-50px);
+}
+.close:hover, 
+.close:focus {
+	text-decoration: none;
+	cursor: pointer;
 }
 .wrapper h2 {
 	text-align: center;
@@ -283,8 +315,8 @@ nav li a:hover {
 }
 #frist-page {
 	position: relative;
-}
-.modal-button, .delete-button {
+} 
+.delete-button {
 	height: 17px;
 	width: 17px;
 	border-radius: 2px;
@@ -293,10 +325,14 @@ nav li a:hover {
 	position: absolute;
 	top: 6px;
 	align-items: center;
-}
-.modal-button {
-	font-size: 11px;
-	left: 35px;
+} 
+button.close {
+	font-size: 24px;
+	border: none;
+	background-color: white;
+	position: absolute;
+	top: 20px;
+	right: 30px;
 }
 .delete-button {
 	font-size: 9px;
