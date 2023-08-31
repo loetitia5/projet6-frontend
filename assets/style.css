@@ -272,7 +272,7 @@ section#portfolio {
 .modal:active {
 	display: block;
 }
-.c-dialog[aria-hidden="true"] {
+.modal[aria-hidden="true"] {
 	visibility: hidden;
 	opacity: 0;
 } 

@@ -12,6 +12,7 @@ btnPublier.addEventListener('click', () => {
 closeModal.addEventListener('click', () => {
   console.log("click");
 });
+
 /*
 async function fetchWorks() {
     const reponse = await fetch ('http://localhost:5678/api/works');
@@ -30,42 +31,59 @@ window.onclick = function(event) {
     if(event.target == myModal) {
         myModal.style.display = "none";
     }
-}*/
-/*
+}*//*
+const focusableElementsArray = [
+    '[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+  ];*/
+  /*
 document.addEventListener('DOMContentLoaded', () => {
-    const buttModals = document.querySelectorAll('[aria-haspopup="dialog"]');
+    console.log("okclose")
+    const triggers = document.querySelectorAll('[aria-haspopup="dialog"]');
     const doc = document.querySelector('.barreLogin');
 
     const open = function (dialog) {
         dialog.setAttribute('aria-hidden', false);
         doc.setAttribute('aria-hidden', true);
       };
-    buttModals.forEach((buttModal) => {
-        const dialog = document.getElementById(buttModal.getAttribute('aria-controls'));
+    
+    const close = function(dialog) {
+        dialog.setAttribute('aria-hidden', false);
+        doc.setAttribute('aria-hidden', true);
+    };
 
-        buttModal.addEventListener('click', (event) => {
+    triggers.forEach((trigger) => {
+        const dialog = document.getElementById(trigger.getAttribute('aria-controls'));
+        const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
+
+        trigger.addEventListener('click', (event) => {
             event.preventDefault();
       
             open(dialog);
+        });
 
-      });
+        dismissTriggers.forEach((dismissTrigger) => {
+            const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss);
+        
+            dismissTrigger.addEventListener('click', (event) => {
+                event.preventDefault();
+        
+                close(dismissDialog);
+            });
+        });
+        window.addEventListener('click', (event) => {
+            if(event.target === dialog) {
+                close(dialog);
+            }
+        });
     });
 });
-
-const btnClose = function(dialog) {
-    dialog.setAttribute('aria-hidden', true);
-    doc.setAttribute('aria-hidden', false);
-};
-
-const dismissButton = dialog.querySelectorAll('[data-dismiss]');
-dismissButton.forEach((dismissButtons) => {
-    const dismissDialog = document.getElementById(dismissButtons.dataset.dismiss);
-    dismissButtons.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        close(dismissDialog);
-    })
-})
+*/
+/*
 //Masquer la deuxieme page 
 secondPageModal('none');
 //classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
