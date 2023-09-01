@@ -25,24 +25,22 @@ async function fetchWorks() {
   
     });
 */
-fetchWorksDisplayGallery(works, '#modal-gallery');
+fetchWorksDisplayGallery(works, '#dialog-gallery');
 /*
 window.onclick = function(event) {
     if(event.target == myModal) {
         myModal.style.display = "none";
     }
-}*//*
+}*/
 const focusableElementsArray = [
     '[href]',
     'button:not([disabled])',
-    'input:not([disabled])',
+    'div:not([disabled])',
     'select:not([disabled])',
-    'textarea:not([disabled])',
     '[tabindex]:not([tabindex="-1"])',
-  ];*/
-  /*
+  ];
+ 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("okclose")
     const triggers = document.querySelectorAll('[aria-haspopup="dialog"]');
     const doc = document.querySelector('.barreLogin');
 
@@ -52,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     
     const close = function(dialog) {
-        dialog.setAttribute('aria-hidden', false);
+        dialog.setAttribute('aria-hidden', true);
         doc.setAttribute('aria-hidden', true);
-    };
-
+    }; 
+ 
     triggers.forEach((trigger) => {
         const dialog = document.getElementById(trigger.getAttribute('aria-controls'));
         const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
@@ -74,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 close(dismissDialog);
             });
-        });
+        }); 
         window.addEventListener('click', (event) => {
             if(event.target === dialog) {
                 close(dialog);
@@ -82,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-*/
+
 /*
 //Masquer la deuxieme page 
 secondPageModal('none');

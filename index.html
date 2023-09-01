@@ -25,19 +25,19 @@
 		<button id="buttonPublierPhoto" class="buttonPublierPhoto" type="button" aria-haspopup="dialog"
 		aria-controls="dialog">publier les changements</button>
 	</div>
-	<div id="modal" class="modal" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" role="dialog">
-		<div class="overlay"></div>
+	<div id="dialog" class="c-dialog modal" aria-labelledby="dialog-title" aria-describedby="dialog-gallery" aria-modal="true" aria-hidden="true" tabindex="-1" role="dialog">
+	
 		<div role="document" class="c-dialog__box wrapper">
 			<button class="close" id="close" type="button"  aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog">X</button>
 			<div id="frist-page">
-				<h2 class="modal-title">Galerie Photo</h2>
-				<div id="modal-gallery"></div>
+				<h2 class="dialog-title">Galerie Photo</h2>
+				<div id="dialog-gallery"></div>
 				<button class="btn-modal">Ajouter une photo</button>
 				<p title="Vous allez supprimer toute la gallery!!!">Supprimer la galerie</p>
 			</div>
 		
 			<div id="two-page">
-				<h2 class="modal-title">Ajout photo</h2>
+				<h2 class="dialog-title">Ajout photo</h2>
 				<form id="modal-form" method="post" action="http://localhost:5678/api/works"></form>
 			</div>
 		</div>
