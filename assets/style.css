@@ -173,7 +173,7 @@ span.logoBarreLogin {
 
 #introduction p {
 	margin-bottom: 0.5em;
-}/*
+}
 .positionModal{
 	display: flex;
 	gap: 10px;
@@ -186,7 +186,7 @@ span.logoBarreLogin {
 #directionModal {
 	display: flex;
 	gap: 30px;
-}*/
+}
 section#portfolio {
 	display: flex;
 	flex-direction: column;
@@ -245,18 +245,17 @@ section#portfolio {
 	display: none;
 }
 .c-dialog {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: absolute;
+  	z-index: 1;
+    top: 660px;
+    left: 405px;
     display: flex;
     padding: 2.4rem;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    background-color: rgba(black, .75);
+	background: #FFFFFF;
     transition: .2s;
+	max-width: 630px;
+	max-height: 731px;
+	border-radius: 10px;
 }
 .dialog, .delete-button{
 	display: flex;
@@ -289,15 +288,11 @@ section#portfolio {
 	background: rgba(0, 0, 0, 0.3);
 }*/
 .wrapper {
-	position: relative;
-	top: 660px;
+/*	position: relative;
+	top: 660px;*/
 	justify-content: center;
-	width: 630px;
-	max-height: 730px;
 	padding: 60px 0px 48px 0px;
-	background: #FFFFFF;
 	border-radius: 10px;
-	transform: translate(-50px,-50px);
 }
 .close:hover, 
 .close:focus {
@@ -312,13 +307,22 @@ section#portfolio {
 	font-weight: 400;
 	padding-bottom: 46px;
 }
+#dialog-gallery {
+	width: 80%;
+	display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: space-between;
+    
+}
 #frist-page,#two-page, .wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 #frist-page {
-	position: relative;
+	/*position: relative;*/
+	width: 100%;
 } 
 .delete-button {
 	height: 17px;
@@ -331,12 +335,12 @@ section#portfolio {
 	align-items: center;
 } 
 button.close {
-	font-size: 24px;
+/*	font-size: 24px;*/
 	border: none;
 	background-color: white;
 	position: absolute;
-	top: 20px;
-	right: 30px;
+	top: 23px;
+	right: 25px;
 }
 .delete-button {
 	font-size: 9px;
@@ -353,8 +357,16 @@ button.close {
     font-size: 10px;
 	text-align: center;
 }
+#dialog-gallery .work {
+	width: 18%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+}
 #two-page {
 	width: 77%;
+	/*display: none;*/
 }
 #two-page p{
 	font-family: 'Syne';

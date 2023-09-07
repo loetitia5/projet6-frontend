@@ -221,10 +221,7 @@ function filterProjet(works,filter) {
 
 
 /*
-//modifier la valeur d'affichage 
-function setDisplayStyle(element, displayValue) {
-  element.style.display = displayValue;
-}*/
+
 
 //fonction pour créer un bouton 
 /*

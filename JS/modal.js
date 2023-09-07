@@ -5,7 +5,7 @@ const btnPublier = document.getElementById("buttonPublierPhoto");
 const closeModal = document.getElementById("close");
 
 btnPublier.addEventListener('click', () => {
-    myModal.ariaHidden = "false";
+   /* myModal.ariaHidden = "true";*/
     console.log(closeModal);
 })
 
@@ -13,19 +13,52 @@ closeModal.addEventListener('click', () => {
   console.log("click");
 });
 
-/*
-async function fetchWorks() {
-    const reponse = await fetch ('http://localhost:5678/api/works');
-    const data = await reponse.json();
-    return data;
-  }
+
+
   fetchWorks().then(works => {
     console.log(works); 
-    fetchWorksDisplayGallery(works, '#modal-gallery');
-  
+    fetchWorksDisplayGallery(works, '#dialog-gallery');
+    workDelete();
+   
     });
-*/
-fetchWorksDisplayGallery(works, '#dialog-gallery');
+
+function fetchWorksDisplayGallery(works, targetElement) {
+    // Sélectionnez l’élément de la galerie 
+    const galleryElement = document.querySelector(targetElement);
+
+    works.forEach(jsonWork => {
+    //Créer l'élement de figure pour représenter le projet
+    const figure = document.createElement('figure');
+    figure.classList.add('work');
+    figure.dataset.category = jsonWork.categoryId;
+        
+    //Créer l'élément img pour afficher l'image du projet
+    const img = document.createElement('img');
+    img.src = jsonWork.imageUrl;
+    img.alt = jsonWork.title;
+        
+    figure.appendChild(img);
+    //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé
+    if(targetElement === '.gallery') {
+        
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent = jsonWork.title;
+        figure.appendChild(figcaption);
+            
+    }
+    //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
+    if(targetElement === '#dialog-gallery') {
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent ='éditer';
+        figure.appendChild(figcaption);
+
+    }
+    //ajouter la figure créer a la galerie 
+    galleryElement.appendChild(figure);
+    });
+    
+}
+
 /*
 window.onclick = function(event) {
     if(event.target == myModal) {
@@ -80,7 +113,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+//clique sur le bouton, ajouter l'affichage de la deuxieme page
+function photoButton() {
+    const buttonPhoto = document.querySelector("#btn-modal");
+    console.log("test");
+    buttonPhoto.addEventListener("click", function() {
+        pageSecondModal;
+    });
+}
 
+
+//modifier la valeur d'affichage 
+function setDisplayStyle(element, displayValue) {
+    element.style.display = displayValue;
+}
+//function permettant d'afficher ou non la premiére page
+function firstPageModal(displayValue) {
+    const onePage = document.getElementById('#frist-page');
+    setDisplayStyle(onePage, displayValue);
+};
+//function permettant d'afficher ou non la deuxieme page
+function secondPageModal(displayValue) {
+    const twoPage = document.getElementById('#two-page');
+    setDisplayStyle(twoPage, displayValue);
+    if(displayValue !== "none") {
+        buttonPhoto();
+    }
+}
+
+//afficher la premieme page
+function pageSecondModal() {
+    firstPageModal('none');
+    secondPageModal('flex');
+};
+//afficher la deuxieme page
+function pageFristModal() {
+    firstPageModal('flex');
+    secondPageModal('none');
+};
+    
 /*
 //Masquer la deuxieme page 
 secondPageModal('none');
@@ -102,13 +173,8 @@ function toogleModal() {
     const elementModal = document.querySelector(".wrapper");
     //pour scoller de haut en bas
     elementModal.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-fetchWorksDisplayGallery("#modal-gallery");
-//clique sur le bouton, ajouter l'affichage de la deuxieme page
-const buttonPhoto = document.querySelector("btn-modal");
-buttonPhoto.addEventListener('click', pageSecondModal);
-
-
+}*/
+/*
 //fonction pour créer le bouton de fermeture de la fenêtre
 function createCloseButton() {
     const closeButton = doFilter(["modal-close", "modal-trigger"]);
@@ -118,7 +184,7 @@ function createCloseButton() {
     document.querySelector(".wrapper").appendChild(closeButton);
     closeButton.appendChild(iconClose);
     return closeButton
-}; 
+}; */
 
 //fonction pour créer le bouton précedent de la fenêtre
 function createButton() {
@@ -132,31 +198,8 @@ function createButton() {
     buttonModal.addEventListener('click', pageFristModal)
     return buttonModal;
 }
-//function permettant d'afficher ou non la premiére page
-function firstPageModal(displayValue) {
-    const onePage = document.getElementById('frist-page');
-    setDisplayStyle(onePage, displayValue);
-};
-//function permettant d'afficher ou non la deuxieme page
-function secondPageModal(displayValue) {
-    const twoPage = document.getElementById('two-page');
-    setDisplayStyle(twoPage, displayValue);
-    if(displayValue !== "none") {
-        createButton();
-    }
-};
-//afficher la premieme page
-function pageSecondModal() {
-    firstPageModal('none');
-    secondPageModal('flex');
-};
-//afficher la deuxieme page
-function pageFristModal() {
-    firstPageModal('flex');
-    secondPageModal('none');
-};
-//affichage gallery
-fetchWorksDisplayGallery();
+
+
 //supprimer un projet
 function workDelete(idWork) {
 const token = window.localStorage.getItem('token');
@@ -202,4 +245,3 @@ function deleteButton(figure , idWork) {
     return deleteButton
 }
 
-*/
