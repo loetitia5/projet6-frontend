@@ -59,7 +59,6 @@ function fetchWorksDisplayGallery(works, targetElement) {
       //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
       if(targetElement === '#dialog-gallery') {
         const figcaption = document.createElement('figcaption');
-        figcaption.textContent ='éditer';
         figure.appendChild(figcaption);
 
         // récuperer l'identifiant
