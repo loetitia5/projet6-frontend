@@ -18,7 +18,7 @@ closeModal.addEventListener('click', () => {
   fetchWorks().then(works => {
     console.log(works); 
     fetchWorksDisplayGallery(works, '#dialog-gallery');
-    workDelete();
+ /*   workDelete();*/
    
     });
 
@@ -140,27 +140,36 @@ function renderLinkDeleteIcon(node) {
   }
   
 //clique sur le bouton, ajouter l'affichage de la deuxieme page
-function photoButton() {
-    const buttonPhoto = document.querySelector("#btn-modal");
-    console.log("test");
-    buttonPhoto.addEventListener("click", function() {
-        pageSecondModal;
-    });
+const buttonPhoto = document.getElementById("btn-modal");
+const onePage = document.getElementById('frist-page');
+const twoPage = document.getElementById('two-page');
+
+function pageTwo(buttonPhoto) {
+    console.log(pageTwo);
+    const twoPage = document.getElementById('two-page');
+
 }
+    buttonPhoto.addEventListener("click", () => {
+        pageTwo();
+    });
+    console.log("test");
+ 
 
 
 //modifier la valeur d'affichage 
 function setDisplayStyle(element, displayValue) {
     element.style.display = displayValue;
+    
+    
 }
 //function permettant d'afficher ou non la premiére page
 function firstPageModal(displayValue) {
-    const onePage = document.getElementById('#frist-page');
+    const onePage = document.getElementById('frist-page');
     setDisplayStyle(onePage, displayValue);
 };
 //function permettant d'afficher ou non la deuxieme page
 function secondPageModal(displayValue) {
-    const twoPage = document.getElementById('#two-page');
+    const twoPage = document.getElementById('two-page');
     setDisplayStyle(twoPage, displayValue);
     if(displayValue !== "none") {
         buttonPhoto();
@@ -211,7 +220,7 @@ function createCloseButton() {
     closeButton.appendChild(iconClose);
     return closeButton
 }; */
-
+/*
 //fonction pour créer le bouton précedent de la fenêtre
 function createButton() {
     const buttonModal = doFilter(['modal-button']);
@@ -270,4 +279,4 @@ function deleteButton(figure , idWork) {
     });
     return deleteButton
 }
-
+*/

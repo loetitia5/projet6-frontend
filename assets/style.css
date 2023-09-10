@@ -129,7 +129,7 @@ nav li a:hover {
     display: flex;
 	height: 59px;
 	align-items: center;
-	max-width: 1140px;
+	width: 1440px;
 }
 span.logoBarreLogin {
 	padding-right: 5px;
@@ -140,16 +140,29 @@ span.logoBarreLogin {
 	font-size: 16px;
 	font-weight: 400;
 }
+.buttonLogin {
+	display: flex;
+    padding-left: 20px;
+}
+#colorSpan {
+	color: black;
+	padding-right: 5px;
+}
 .buttonPublierPhoto {
-	width: 216px;
-	height: 38px;
-	top: 10px;
-	border-radius: 60px;
-	background-color: white;
-	font-weight: bold;
+	border: none;
+	background-color: #FFFEF8;
+
 }
 .txtMode, .buttonPublierPhoto {
 	font-family: 'work Sans';
+}
+.btn-modal {
+	color: white;
+    background-color: #1D6154;
+    border-radius: 60px;
+    width: 237px;
+    height: 36px;
+	border: none;
 }
 #introduction {
 	display: flex;
@@ -186,6 +199,10 @@ span.logoBarreLogin {
 #directionModal {
 	display: flex;
 	gap: 30px;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
 }
 section#portfolio {
 	display: flex;
@@ -303,8 +320,9 @@ section#portfolio {
 	width: 80%;
 	display: flex;
     flex-wrap: wrap;
-    gap: 6px;
     justify-content: space-between;
+	border-bottom: 1px solid black;
+	margin-bottom: 45px;
     
 }
 #frist-page,#two-page, .wrapper {
@@ -352,9 +370,9 @@ button.close {
 #dialog-gallery .work {
 	width: 18%;
     display: flex;
-    gap: 10px;
     flex-direction: column;
 	position: relative;
+	margin-bottom: 40px;
 }
 #dialog-gallery img {
 	display: block;

@@ -12,6 +12,7 @@ window.addEventListener('unload', () => {
   });
 
 const barreLogins = document.getElementById('barreLogin');
+const buttonLogins = document.getElementById('buttonLogin');
 //affichage des éléments coté admin si token present
 if (token){ 
     displayLogout.firstElementChild.textContent = "logout";
@@ -22,7 +23,10 @@ if (token){
         window.location.href = "./login.html";
     });    
     barreLogins.classList.remove("hidden");
+    buttonLogins.classList.remove("hidden");
     
+    const removefilterlogout = document.getElementById("filters");
+    removefilterlogout.remove();
     /*  
     const changement = document.createElement("div");
     const newBtn = document.createElement("button");
