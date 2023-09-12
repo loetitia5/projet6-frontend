@@ -140,19 +140,63 @@ function renderLinkDeleteIcon(node) {
   }
   
 //clique sur le bouton, ajouter l'affichage de la deuxieme page
-const buttonPhoto = document.getElementById("btn-modal");
+const buttonPhotos = document.getElementById("btn-modal");
 const onePage = document.getElementById('frist-page');
-const twoPage = document.getElementById('two-page');
+// const twoPage = document.getElementById('two-page');
 
-function pageTwo(buttonPhoto) {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("textAffichage");
+    const buttonsPhotos = document.querySelectorAll(' [aria-haspopup="dialog"]');
+    const btnPhotos = document.getElementById(".twoPage");
+    console.log("buttonsPhotos");
+    console.log("btnPhotos");
+    const open = function (dialog) {
+        dialog.setAttribute('aria-hidden', false);
+        btnPhotos.setAttribute('aria-hidden', true);
+      };
+    
+    const close = function(dialog) {
+        dialog.setAttribute('aria-hidden', true);
+        btnPhotos.setAttribute('aria-hidden', true);
+    }; 
+ 
+    buttonsPhotos.forEach((buttonsPhoto) => {
+        const dialog = document.getElementById(buttonsPhoto.getAttribute('aria-controls'));
+        const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
+
+        buttonsPhoto.addEventListener('click', (event) => {
+            event.preventDefault();
+      
+            open(dialog);
+        });
+
+        dismissTriggers.forEach((dismissTrigger) => {
+            const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss);
+        
+            dismissTrigger.addEventListener('click', (event) => {
+                event.preventDefault();
+        
+                close(dismissDialog);
+            });
+        }); 
+        window.addEventListener('click', (event) => {
+            if(event.target === dialog) {
+                close(dialog);
+            }
+        });
+    });
+});
+/* function pageTwo(buttonPhoto) {
     console.log(pageTwo);
     const twoPage = document.getElementById('two-page');
 
 }
-    buttonPhoto.addEventListener("click", () => {
-        pageTwo();
-    });
-    console.log("test");
+function buttonPhoto() {
+    buttonPhotos;
+    buttonPhoto.addEventListener("click", secondPageModal);
+}
+   
+
  
 
 
@@ -208,19 +252,9 @@ function toogleModal() {
     const elementModal = document.querySelector(".wrapper");
     //pour scoller de haut en bas
     elementModal.scrollIntoView({ behavior: "smooth", block: "start" });
-}*/
-/*
-//fonction pour créer le bouton de fermeture de la fenêtre
-function createCloseButton() {
-    const closeButton = doFilter(["modal-close", "modal-trigger"]);
+}
 
-    const iconClose = filterProjet("fa-solid", "fa-xmark");
 
-    document.querySelector(".wrapper").appendChild(closeButton);
-    closeButton.appendChild(iconClose);
-    return closeButton
-}; */
-/*
 //fonction pour créer le bouton précedent de la fenêtre
 function createButton() {
     const buttonModal = doFilter(['modal-button']);
@@ -279,4 +313,16 @@ function deleteButton(figure , idWork) {
     });
     return deleteButton
 }
-*/
+*//*
+// Création de la photo de localisation
+const addPhotoDiv = createAndAppendElement('div', form, 'modal-add-photo');
+
+const svg = document.querySelector("#modal-form svg");
+addPhotoDiv.appendChild(svg);
+
+const containerImg = createAndAppendElement('img', addPhotoDiv, 'container-img',{ id:'container-image'});
+containerImg.style.display = 'none';
+
+const photoInput = createAndAppendInputElement(addPhotoDiv, 'file', 'photo', {
+  accept: 'image/jpeg, image/png','max-size': '4194304',style: 'display: none'  
+});*/
