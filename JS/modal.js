@@ -91,9 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
     triggers.forEach((trigger) => {
         const dialog = document.getElementById(trigger.getAttribute('aria-controls'));
         const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
+        console.log(dismissTriggers);
 
         trigger.addEventListener('click', (event) => {
+            console.log(trigger);
+            console.log(dialog);
             event.preventDefault();
+            if(trigger.getAttribute("aria-controls") == "dialog-ajout") {
+                const dismissGallery = document.getElementById("dialog");
+                close(dismissGallery);
+            }
       
             open(dialog);
         });
@@ -144,93 +151,16 @@ const buttonPhotos = document.getElementById("btn-modal");
 const onePage = document.getElementById('frist-page');
 // const twoPage = document.getElementById('two-page');
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("textAffichage");
-    const buttonsPhotos = document.querySelectorAll(' [aria-haspopup="dialog"]');
-    const btnPhotos = document.getElementById(".twoPage");
-    console.log("buttonsPhotos");
-    console.log("btnPhotos");
-    const open = function (dialog) {
-        dialog.setAttribute('aria-hidden', false);
-        btnPhotos.setAttribute('aria-hidden', true);
-      };
-    
-    const close = function(dialog) {
-        dialog.setAttribute('aria-hidden', true);
-        btnPhotos.setAttribute('aria-hidden', true);
-    }; 
- 
-    buttonsPhotos.forEach((buttonsPhoto) => {
-        const dialog = document.getElementById(buttonsPhoto.getAttribute('aria-controls'));
-        const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
 
-        buttonsPhoto.addEventListener('click', (event) => {
-            event.preventDefault();
-      
-            open(dialog);
-        });
-
-        dismissTriggers.forEach((dismissTrigger) => {
-            const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss);
-        
-            dismissTrigger.addEventListener('click', (event) => {
-                event.preventDefault();
-        
-                close(dismissDialog);
-            });
-        }); 
-        window.addEventListener('click', (event) => {
-            if(event.target === dialog) {
-                close(dialog);
-            }
-        });
-    });
-});
-/* function pageTwo(buttonPhoto) {
-    console.log(pageTwo);
-    const twoPage = document.getElementById('two-page');
-
+function photo() {
+const ajoutPhoto = document.createElement('div'); 
+const rajoutPhoto = document.getElementById('ajout-photo');
+console.log(ajoutPhoto);
+ajoutPhoto.appendChild(rajoutPhoto);
 }
-function buttonPhoto() {
-    buttonPhotos;
-    buttonPhoto.addEventListener("click", secondPageModal);
-}
-   
-
  
 
 
-//modifier la valeur d'affichage 
-function setDisplayStyle(element, displayValue) {
-    element.style.display = displayValue;
-    
-    
-}
-//function permettant d'afficher ou non la premiére page
-function firstPageModal(displayValue) {
-    const onePage = document.getElementById('frist-page');
-    setDisplayStyle(onePage, displayValue);
-};
-//function permettant d'afficher ou non la deuxieme page
-function secondPageModal(displayValue) {
-    const twoPage = document.getElementById('two-page');
-    setDisplayStyle(twoPage, displayValue);
-    if(displayValue !== "none") {
-        buttonPhoto();
-    }
-}
-
-//afficher la premieme page
-function pageSecondModal() {
-    firstPageModal('none');
-    secondPageModal('flex');
-};
-//afficher la deuxieme page
-function pageFristModal() {
-    firstPageModal('flex');
-    secondPageModal('none');
-};
-    
 /*
 //Masquer la deuxieme page 
 secondPageModal('none');
@@ -268,7 +198,7 @@ function createButton() {
     return buttonModal;
 }
 
-
+*//*
 //supprimer un projet
 async function workDelete(idWork) {
     const token = window.localStorage.getItem('token');
@@ -312,17 +242,63 @@ function deleteButton(figure , idWork) {
         figure.appendChild(confirmDelete);
     });
     return deleteButton
-}
-*//*
+}*/
+/*
+const form = document.getElementById('modal-form');
 // Création de la photo de localisation
-const addPhotoDiv = createAndAppendElement('div', form, 'modal-add-photo');
+const addPhoto = document.createElement( 'modal-add-photo');
 
-const svg = document.querySelector("#modal-form svg");
-addPhotoDiv.appendChild(svg);
+const svg = document.querySelector("svg");
+addPhoto.appendChild(svg);
 
-const containerImg = createAndAppendElement('img', addPhotoDiv, 'container-img',{ id:'container-image'});
+const containerImg = document.createElement('img', { id:'container-image'});
 containerImg.style.display = 'none';
 
-const photoInput = createAndAppendInputElement(addPhotoDiv, 'file', 'photo', {
+const photoInput = document.createInputElement('file', {
   accept: 'image/jpeg, image/png','max-size': '4194304',style: 'display: none'  
-});*/
+});
+const addButton = createButtonElement( 'btn-ajout');
+addButton.textContent = '+ Ajouter photo';
+
+const infoParagraph = createElement('p');
+infoParagraph.textContent = 'jpg, png : 4 mo max';
+
+
+ //il déclenche la sélection du fichier
+addButton.addEventListener('click', function() {
+    photoInput(); 
+  });
+  containerImg.addEventListener('click', function() {
+    photoInput(); 
+  });
+   
+  photoInput.addEventListener('change', function(event) {
+    const selectedFile = event.target.files[0];
+   
+    if (selectedFile) {
+      const reader = new FileReader();
+  
+      reader.addEventListener('load', function() {
+        const imageUrl = reader.result;
+        
+        containerImg.style.display = 'block';
+        containerImg.src = imageUrl;
+        addButton.style.visibility = 'hidden';
+  
+        const fileName = selectedFile.name;
+  
+        const formattedFileName = formatFileName(fileName);
+  
+        titleInput.value = formattedFileName;
+      });
+  
+      reader.readAsDataURL(selectedFile);
+    } else {
+  
+      containerImg.style.display = 'none';
+      containerImg.src = '';
+      addButton.style.visibility = 'visible';
+ 
+      titleInput.value = '';
+    }
+  });*/

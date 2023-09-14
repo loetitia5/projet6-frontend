@@ -274,6 +274,12 @@ section#portfolio {
 	max-height: 731px;
 	border-radius: 10px;
 }
+.fleche-svg {
+	display: flex;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
 .dialog, .delete-button{
 	display: flex;
 	justify-content: center;
@@ -300,7 +306,7 @@ section#portfolio {
 /*	position: relative;
 	top: 660px;*/
 	justify-content: center;
-	padding: 60px 0px 48px 0px;
+	padding: 43px 0px 48px 0px;
 	border-radius: 10px;
 }
 .close:hover, 
@@ -345,11 +351,11 @@ section#portfolio {
 	align-items: center;
 } 
 button.close {
-/*	font-size: 24px;*/
+	font-size: 24px;
 	border: none;
 	background-color: white;
 	position: absolute;
-	top: 23px;
+	top: 15px;
 	right: 25px;
 }
 .delete-button {
@@ -388,13 +394,39 @@ button.close {
     background-color: black;
 }
 #two-page {
-	width: 77%;
+	width: 100%;
 	/*display: none;*/
 }
 #two-page p{
 	font-family: 'Syne';
 	color: #B1663C;
 	cursor: pointer;
+}
+.modal-form {
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.rajout {
+	width: 90%;
+    display: flex;
+    flex-direction: column;
+	gap: 15px;
+	background-color: #E8F1F6;
+    border-radius: 3px;
+}
+.rajout svg {
+	align-self: center;
+	margin-top: 20px;
+}
+#color-modal {
+	font-family: 'work Sans';
+	color: #444444;
+}
+.info-element {
+	display: flex;
+    flex-direction: column;
 }
 #contact {
 	width: 50%;
