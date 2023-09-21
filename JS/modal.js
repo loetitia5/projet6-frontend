@@ -19,6 +19,7 @@ closeModal.addEventListener('click', () => {
     console.log(works); 
     fetchWorksDisplayGallery(works, '#dialog-gallery');
  /*   workDelete();*/
+    photo();
    
     });
 
@@ -101,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dismissGallery = document.getElementById("dialog");
                 close(dismissGallery);
             }
-      
             open(dialog);
         });
 
@@ -120,6 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    if(('#fleche-svg') === ('#frist-page')) {
+        console.log(text);
+        const flecheModal = document.getElementById('fleche-svg');
+        flecheModal.addEventListener("click", function() {
+            open('two-page');
+        })
+    }
+
+
 });
 
 function renderLinkDeleteIcon(node) {
@@ -153,52 +163,40 @@ const onePage = document.getElementById('frist-page');
 
 
 function photo() {
-const ajoutPhoto = document.createElement('div'); 
 const rajoutPhoto = document.getElementById('ajout-photo');
-console.log(ajoutPhoto);
-ajoutPhoto.appendChild(rajoutPhoto);
+console.log(rajoutPhoto);
+rajoutPhoto.addEventListener("click", function() {
+    let ajoutPhoto = document.createElement("div");
+})
 }
- 
-
+ /*
+const titleInput = document.getElementById('titre-modale');
+const categorySelect = document.getElementById('titre-modale');
+const photoInput = document.getElementById('titre-modale');
 
 /*
-//Masquer la deuxieme page 
-secondPageModal('none');
-//classe modal_trigger est ajoutée sur le bouton X de fermeture, sur le bouton "modifier"
-createCloseButton();
-const elements = document.querySelectorAll("#directionModal .positionModal, overlay"); 
-elements.forEach(element => {
-    element.classList.add('modal-trigger')
-});
-//récupérer toute la classe madal-trigger
-const trigger = document.querySelectorAll("modal-trigger");
-//parcourir les differentes classes et en cliquant sur l'une d'entre elles
-trigger.forEach(triggers =>triggers.addEventListener("click", toogleModal))
+function checkFormFields() {
+    const titleValue = titleInput.value;
+    const categoryValue = categorySelect.value;
+    const imageFile = photoInput.files[0];
+/*
+  *//*
+    // Check if all fields are filled
+     // Vérifiez si tous les champs sont remplis
+    const allFieldsFilled = titleValue.trim() !== '' && categoryValue.trim() !== '' && imageFile !== undefined;
+  
+    const submitButton = document.getElementById('valider-ajout');
+    // Update the color of the validation button
+    // Mettre à jour la couleur du bouton de validation
+    submitButton.style.backgroundColor = allFieldsFilled ? '#1D6154' : '#A7A7A7';
+}*/
+/*
+titleInput.addEventListener('input', checkFormFields);
+categorySelect.addEventListener('change', checkFormFields);
+photoInput.addEventListener('change', checkFormFields);
+  */
 
-function toogleModal() {
-    const modal = document.getElementById("modal");
-    modal.classList.toggle("active");
-
-    const elementModal = document.querySelector(".wrapper");
-    //pour scoller de haut en bas
-    elementModal.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-
-//fonction pour créer le bouton précedent de la fenêtre
-function createButton() {
-    const buttonModal = doFilter(['modal-button']);
-
-    const iconModal = filterProjet("fa-solid", "fa-arrow-left-long");
-    buttonModal.appendChild(iconModal);
-
-    document.getElementById("two-page").appendChild(buttonModal);
-
-    buttonModal.addEventListener('click', pageFristModal)
-    return buttonModal;
-}
-
-*//*
+/*
 //supprimer un projet
 async function workDelete(idWork) {
     const token = window.localStorage.getItem('token');

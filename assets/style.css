@@ -123,13 +123,17 @@ nav li a:hover {
 	font-weight: 600;
 	color: black;
 }
+html body #barreLogin {
+	max-width: 1440px;
+	margin: 0;
+}
 .barreLogin {
 	background-color: black;
 	justify-content: center;
     display: flex;
 	height: 59px;
 	align-items: center;
-	width: 1440px;
+	
 }
 span.logoBarreLogin {
 	padding-right: 5px;
@@ -270,8 +274,8 @@ section#portfolio {
     padding: 2.4rem;
 	background: #FFFFFF;
     transition: .2s;
-	max-width: 630px;
-	max-height: 731px;
+	width: 630px;
+	height: 731px;
 	border-radius: 10px;
 }
 .fleche-svg {
@@ -394,39 +398,80 @@ button.close {
     background-color: black;
 }
 #two-page {
-	width: 100%;
+	width: 630px;
+	height: 670px;
 	/*display: none;*/
 }
 #two-page p{
-	font-family: 'Syne';
-	color: #B1663C;
+	font-family: 'Work Sans';
 	cursor: pointer;
 }
 .modal-form {
 	display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     align-items: center;
 }
 .rajout {
-	width: 90%;
+	width: 420px;
     display: flex;
     flex-direction: column;
 	gap: 15px;
 	background-color: #E8F1F6;
     border-radius: 3px;
+	height: 169px;
+	margin-bottom: 43px;
 }
 .rajout svg {
 	align-self: center;
 	margin-top: 20px;
 }
+#ajout-photo {
+	width: 173px;
+    height: 36px;
+    align-self: center;
+    border-radius: 50px;
+	color: #306685;
+    font-size: 14px;
+    font-weight: bold;
+	background-color: #CBD6DC;
+	border: none;
+}
 #color-modal {
 	font-family: 'work Sans';
 	color: #444444;
+	font-size: 10px;
+    align-self: center;
 }
 .info-element {
 	display: flex;
     flex-direction: column;
+	width: 420px;
+	gap: 20px;
+}
+input, select#categorie {
+	height: 51px;
+}
+select#categorie {
+	margin-bottom: 54px;
+}
+.ajout-photos {
+	width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    background-color: #a7a7a7;
+    color: white;
+    align-self: center;
+	border: none;
+    margin-top: 62px;
+}
+.formulaire-ajout {
+	display: contents;
+}
+.border-button {
+	border-top: 1px solid black;
+	display: flex;
+	justify-content: center;
 }
 #contact {
 	width: 50%;
