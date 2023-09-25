@@ -19,7 +19,7 @@ closeModal.addEventListener('click', () => {
     console.log(works); 
     fetchWorksDisplayGallery(works, '#dialog-gallery');
  /*   workDelete();*/
-    photo();
+
    
     });
 
@@ -164,10 +164,62 @@ const onePage = document.getElementById('frist-page');
 
 function photo() {
 const rajoutPhoto = document.getElementById('ajout-photo');
+const divphoto = document.getElementById('rajout');
 console.log(rajoutPhoto);
-rajoutPhoto.addEventListener("click", function() {
-    let ajoutPhoto = document.createElement("div");
-})
+rajoutPhoto.addEventListener("click", function(event) {
+   /* const ajoutPhoto = document.createElement("div");
+    ajoutPhoto.classList.add('divphoto');
+    rajoutPhoto.appendChild(ajoutPhoto);
+    const imgmodal = document.createElement('img');
+    imgmodal.src = jsonWork.imageUrl;
+    imgmodal.alt = jsonWork.title;
+    ajoutPhoto.appendChild(imgmodal);*/
+    event.preventDefault();
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = _ => {
+      // you can use this method to get file and perform respective operations
+              let file =   input.files[0];
+              console.log(file);
+              if (!file.type.startsWith("image/")) {
+                return;
+              }
+          
+              const img = document.createElement("img");
+              img.classList.add("divphoto");
+              img.file = file;
+                while (divphoto.firstChild) {
+                    divphoto.removeChild(divphoto.firstChild);
+}
+              divphoto.appendChild(img); // Où  "preview" correspond à l'élément div où on affiche le contenu.
+          
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                img.src = e.target.result;
+              };
+              reader.readAsDataURL(file);
+          };
+    input.click();
+    })
+}
+photo();
+
+async function envoi(event) {
+  event.preventDefault();
+  console.log(envoi);
+  const divRajout = document.getElementById("rajout");
+  const infoElement  = document.getElementById("info-element");
+  let response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json; charset=UTF-8" 
+      },
+      body: JSON.stringify({
+          svg: imageUrl,
+          input: titre,
+          select: categories
+      })
+  })
 }
  /*
 const titleInput = document.getElementById('titre-modale');

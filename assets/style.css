@@ -437,6 +437,12 @@ button.close {
 	background-color: #CBD6DC;
 	border: none;
 }
+.divphoto {
+	height: 193px;
+    width: 129px;
+    align-self: center;
+    justify-items: center;
+}
 #color-modal {
 	font-family: 'work Sans';
 	color: #444444;
