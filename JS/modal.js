@@ -191,8 +191,8 @@ rajoutPhoto.addEventListener("click", function(event) {
                 while (divphoto.firstChild) {
                     divphoto.removeChild(divphoto.firstChild);
 }
-              divphoto.appendChild(img); // Où  "preview" correspond à l'élément div où on affiche le contenu.
-          
+              divphoto.appendChild(img); 
+
               const reader = new FileReader();
               reader.onload = (e) => {
                 img.src = e.target.result;
@@ -221,27 +221,29 @@ async function envoi(event) {
       })
   })
 }
- /*
-const titleInput = document.getElementById('titre-modale');
-const categorySelect = document.getElementById('titre-modale');
-const photoInput = document.getElementById('titre-modale');
+// Get references to form elements
+const myForm = document.getElementById("modal-form");
+const submitButton = document.getElementById("valider-ajout");
 
-/*
-function checkFormFields() {
-    const titleValue = titleInput.value;
-    const categoryValue = categorySelect.value;
-    const imageFile = photoInput.files[0];
-/*
-  *//*
-    // Check if all fields are filled
-     // Vérifiez si tous les champs sont remplis
-    const allFieldsFilled = titleValue.trim() !== '' && categoryValue.trim() !== '' && imageFile !== undefined;
-  
-    const submitButton = document.getElementById('valider-ajout');
-    // Update the color of the validation button
-    // Mettre à jour la couleur du bouton de validation
-    submitButton.style.backgroundColor = allFieldsFilled ? '#1D6154' : '#A7A7A7';
-}*/
+// Add event listeners to form fields
+myForm.addEventListener("button", updateButtonColor);
+
+// Function to update button color
+function updateButtonColor() {
+  const allFieldsCompleted = Array.from(myForm.elements).every((field) => {
+    return field.tagName === "BUTTON" && field.required && field.value.trim() !== "";
+  });
+
+  if (allFieldsCompleted) {
+    submitButton.style.backgroundColor = "#1D6154"; // Change to desired color
+  } else {
+    submitButton.style.backgroundColor = "#A7A7A7"; // Reset to initial color
+  }
+}
+
+
+ 
+/*}
 /*
 titleInput.addEventListener('input', checkFormFields);
 categorySelect.addEventListener('change', checkFormFields);
