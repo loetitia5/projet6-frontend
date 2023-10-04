@@ -123,9 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
   });
 
-document.getElementById('fleche-svg').addEventListener("click", function() {
-  this.window.history.back();  
-  //this.props.history.push(two-page);
+document.getElementById("fleche-svg").addEventListener("click", function(event) {
+  event.preventDefault();  
+  window.localStorage.setItem("c-dialog__box", "two-page");
+
 });
 
 function renderLinkDeleteIcon(node) {
