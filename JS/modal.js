@@ -121,15 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    if(('#fleche-svg') === ('#frist-page')) {
-        console.log(text);
-        const flecheModal = document.getElementById('fleche-svg');
-        flecheModal.addEventListener("click", function() {
-            open('two-page');
-        })
-    }
+  });
 
-
+document.getElementById('fleche-svg').addEventListener("click", function() {
+  this.window.history.back();  
+  //this.props.history.push(two-page);
 });
 
 function renderLinkDeleteIcon(node) {
@@ -187,6 +183,7 @@ rajoutPhoto.addEventListener("click", function(event) {
           
               const img = document.createElement("img");
               img.classList.add("divphoto");
+              img.setAttribute("id", "divphoto");
               img.file = file;
                 while (divphoto.firstChild) {
                     divphoto.removeChild(divphoto.firstChild);
@@ -198,43 +195,58 @@ rajoutPhoto.addEventListener("click", function(event) {
                 img.src = e.target.result;
               };
               reader.readAsDataURL(file);
+              updateButtonColor();
           };
     input.click();
+    
     })
 }
 photo();
 
+const envoiForm = document.getElementById("valider-ajout");
+envoiForm.addEventListener("click", envoi); 
+
 async function envoi(event) {
   event.preventDefault();
-  console.log(envoi);
-  const divRajout = document.getElementById("rajout");
-  const infoElement  = document.getElementById("info-element");
+  const image = document.getElementById("divphoto").src;
+  const title = document.getElementById("titre-modale").value;
+  const category = document.getElementById("categorie").value;
+
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('title', title);
+  formData.append('category', category);
+  let token = window.localStorage.getItem("token");
+  console.log(token);
+
   let response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-      "Content-Type": "application/json; charset=UTF-8" 
+      "accept": "application/json",
+      "Authorization": "Bearer " + token
       },
-      body: JSON.stringify({
-          svg: imageUrl,
-          input: titre,
-          select: categories
-      })
+      body: formData
   })
 }
 // Get references to form elements
 const myForm = document.getElementById("modal-form");
-const submitButton = document.getElementById("valider-ajout");
+
 
 // Add event listeners to form fields
-myForm.addEventListener("button", updateButtonColor);
+myForm.addEventListener("input", updateButtonColor);
 
 // Function to update button color
 function updateButtonColor() {
-  const allFieldsCompleted = Array.from(myForm.elements).every((field) => {
-    return field.tagName === "BUTTON" && field.required && field.value.trim() !== "";
-  });
-
-  if (allFieldsCompleted) {
+  console.log("ok");
+  const submitButton = document.getElementById("valider-ajout");
+  const inputCompleted = document.getElementById("titre-modale").value.trim() !== "";
+  
+  console.log(inputCompleted);
+  const selectCompleted = document.getElementById("categorie").value.trim() !== "";
+  console.log(selectCompleted);
+  const divCompleted = document.getElementById("rajout").children.length===1 && document.getElementById("rajout").children[0].tagName==="IMG";
+  
+  if (inputCompleted && selectCompleted && divCompleted) {
     submitButton.style.backgroundColor = "#1D6154"; // Change to desired color
   } else {
     submitButton.style.backgroundColor = "#A7A7A7"; // Reset to initial color
