@@ -330,7 +330,7 @@ section#portfolio {
 	width: 80%;
 	display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 10px;
 	border-bottom: 1px solid black;
 	margin-bottom: 45px;
     

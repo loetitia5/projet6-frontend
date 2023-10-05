@@ -14,51 +14,55 @@ closeModal.addEventListener('click', () => {
 });
 
 
-
-  fetchWorks().then(works => {
-    console.log(works); 
-    fetchWorksDisplayGallery(works, '#dialog-gallery');
- /*   workDelete();*/
-
-   
-    });
+fetchWorks().then(works => {
+  console.log(works); 
+  fetchWorksDisplayGallery(works, '#dialog-gallery');
+});
 
 function fetchWorksDisplayGallery(works, targetElement) {
     // Sélectionnez l’élément de la galerie 
     const galleryElement = document.querySelector(targetElement);
 
     works.forEach(jsonWork => {
-    //Créer l'élement de figure pour représenter le projet
-    const figure = document.createElement('figure');
-    figure.classList.add('work');
-    figure.dataset.category = jsonWork.categoryId;
-        
-    //Créer l'élément img pour afficher l'image du projet
-    const img = document.createElement('img');
-    img.src = jsonWork.imageUrl;
-    img.alt = jsonWork.title;
-        
-    figure.appendChild(img);
-    //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé
-    if(targetElement === '.gallery') {
-        
-        const figcaption = document.createElement('figcaption');
-        figcaption.textContent = jsonWork.title;
-        figure.appendChild(figcaption);
-            
-    }
-    //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
-    if(targetElement === '#dialog-gallery') {
-    /*    const figcaption = document.createElement('figcaption');
-        figure.appendChild(figcaption);*/
-        renderLinkDeleteIcon(figure);
-
-
-    }
-    //ajouter la figure créer a la galerie 
-    galleryElement.appendChild(figure);
+      //Créer l'élement de figure pour représenter le projet
+      const figure = document.createElement('figure');
+      figure.classList.add('work');
+      figure.dataset.category = jsonWork.categoryId;
+          
+      //Créer l'élément img pour afficher l'image du projet
+      const img = document.createElement('img');
+      img.src = jsonWork.imageUrl;
+      img.alt = jsonWork.title;
+          
+      figure.appendChild(img);
+      //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé
+      if(targetElement === '.gallery') {
+          
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent = jsonWork.title;
+          figure.appendChild(figcaption);
+              
+      }
+      //Pour la galerie de la modale même chose mais au lieu du titre ajouter le mot éditer
+      if(targetElement === '#dialog-gallery') {
+      /*    const figcaption = document.createElement('figcaption');
+          figure.appendChild(figcaption);*/
+          renderLinkDeleteIcon(figure, jsonWork.id);
+      }
+      //ajouter la figure créer a la galerie 
+      galleryElement.appendChild(figure);
     });
-    
+    const allDelete = document.getElementsByClassName("delete-icon");
+    console.log(allDelete);
+    if(allDelete) {
+      Array.from(allDelete).forEach(deleteButton => {
+        deleteButton.addEventListener("click", () => {
+          const deleteId = deleteButton.id;
+          //appel API pour supprimer le projet donc id est deleteId
+          workDelete(deleteId);
+        })
+      });
+    }
 }
 
 /*
@@ -125,11 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById("fleche-svg").addEventListener("click", function(event) {
   event.preventDefault();  
-  window.localStorage.setItem("c-dialog__box", "two-page");
-
+  const fermDialog = document.getElementById("dialog-ajout");
+  fermDialog.setAttribute('aria-hidden', true);
+  const openmodal = document.getElementById("dialog");
+  openmodal.setAttribute('aria-hidden', false);
 });
 
-function renderLinkDeleteIcon(node) {
+function renderLinkDeleteIcon(node, idDelete) {
     const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const iconPath = document.createElementNS(
       'http://www.w3.org/2000/svg',
@@ -141,6 +147,7 @@ function renderLinkDeleteIcon(node) {
     iconSvg.setAttribute('height', '11');
     iconSvg.setAttribute('width', '9');
     iconSvg.classList.add('delete-icon');
+    iconSvg.setAttribute("id", idDelete);
   
     iconPath.setAttribute(
       'd',
@@ -174,6 +181,10 @@ rajoutPhoto.addEventListener("click", function(event) {
     event.preventDefault();
     let input = document.createElement('input');
     input.type = 'file';
+    input.name = "image";
+    input.style.display= "none";
+    const modalForm = document.getElementById("modal-form");
+    modalForm.appendChild(input);
     input.onchange = _ => {
       // you can use this method to get file and perform respective operations
               let file =   input.files[0];
@@ -188,7 +199,7 @@ rajoutPhoto.addEventListener("click", function(event) {
               img.file = file;
                 while (divphoto.firstChild) {
                     divphoto.removeChild(divphoto.firstChild);
-}
+                }
               divphoto.appendChild(img); 
 
               const reader = new FileReader();
@@ -197,9 +208,8 @@ rajoutPhoto.addEventListener("click", function(event) {
               };
               reader.readAsDataURL(file);
               updateButtonColor();
-          };
+    };
     input.click();
-    
     })
 }
 photo();
@@ -209,14 +219,17 @@ envoiForm.addEventListener("click", envoi);
 
 async function envoi(event) {
   event.preventDefault();
-  const image = document.getElementById("divphoto").src;
+  /*const image = document.getElementById("divphoto").src;
+  const binaryString = atob(image.split(',')[1]);
+  const blob = new Blob([binaryString], { type: 'image/png' });
   const title = document.getElementById("titre-modale").value;
-  const category = document.getElementById("categorie").value;
+  const category = document.getElementById("categorie").value;*/
 
-  const formData = new FormData();
-  formData.append('image', image);
+  const formulaire = document.getElementById("modal-form");
+  const formData = new FormData(formulaire);
+  /*formData.append('image', blob);
   formData.append('title', title);
-  formData.append('category', category);
+  formData.append('category', category);*/
   let token = window.localStorage.getItem("token");
   console.log(token);
 
@@ -228,9 +241,27 @@ async function envoi(event) {
       },
       body: formData
   })
+  if (response.ok) { // if HTTP-status is 200-299
+    //ferme le modale
+    const fermDialog = document.getElementById("dialog-ajout");
+    fermDialog.setAttribute('aria-hidden', true);
+    //actualiser la page ou refaire appel a API works
+    fetchWorks().then(works => {
+      cleanup();
+      fetchWorksDisplayGallery(works, '.gallery');
+    })
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
 }
 // Get references to form elements
 const myForm = document.getElementById("modal-form");
+
+async function fetchWorks() {
+  const reponse = await fetch ('http://localhost:5678/api/works');
+  const data = await reponse.json();
+  return data;
+}
 
 
 // Add event listeners to form fields
@@ -254,7 +285,14 @@ function updateButtonColor() {
   }
 }
 
-
+function cleanup(gallerySelector="") {
+  const galleryElement = gallerySelector === "" ? document.querySelector(".gallery") : document.querySelector(gallerySelector);
+  let child = galleryElement.lastElementChild; 
+  while(child) {
+    galleryElement.removeChild(child);
+    child = galleryElement.lastElementChild;
+  }
+}
  
 /*}
 /*
@@ -263,7 +301,7 @@ categorySelect.addEventListener('change', checkFormFields);
 photoInput.addEventListener('change', checkFormFields);
   */
 
-/*
+
 //supprimer un projet
 async function workDelete(idWork) {
     const token = window.localStorage.getItem('token');
@@ -275,20 +313,19 @@ async function workDelete(idWork) {
             'Authorization' : `Bearer ${token}`,
         },
     })
-    .then((responses) => {
-        if (responses === "error") {
-            //Aprés la suppression, actualiser l'affichage de la galerie 
-            freshGallery("#modal-gallery");
-            freshGallery(".gallery");
-        } else if(responses === error) {
-            //Gérer les erreurs de suppression
-            errorMessage("Utilisateur non valide",".modal-title");
-        } else {
-            errorMessage("Une erreur est survenue lors de la connexion", ".modal-title");
-        }
+    .then((response) => {
+      if (response.ok) { 
+        //actualiser la page ou refaire appel a API works
+        fetchWorks().then(works => {
+          cleanup("#dialog-gallery");
+          fetchWorksDisplayGallery(works, '#dialog-gallery');
+        })
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
     });
 }
-
+/*
 //Fonction pour afficher une icone de suppression 
 function deleteButton(figure , idWork) {
     const buttonDelete = doFilter(['delete-button']);
