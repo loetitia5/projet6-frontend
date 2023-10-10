@@ -9,7 +9,7 @@ const token = window.localStorage.getItem("token");
 // l’utilisateur ferme l’onglet ou quitte le navigateur, il se déconnecte
 window.addEventListener('unload', () => {
     window.localStorage.removeItem("token");
-  });
+});
 
 const barreLogins = document.getElementById('barreLogin');
 const buttonLogins = document.getElementById('buttonLogin');
@@ -27,13 +27,7 @@ if (token){
     
     const removefilterlogout = document.getElementById("filters");
     removefilterlogout.remove();
-    /*  
-    const changement = document.createElement("div");
-    const newBtn = document.createElement("button");
-    const btnText = document.createTextNode("publier les changements");
-    changement.appendChild(newBtn);
-    const head = document.getElementsByTagName("header");
-    head[0].insertBefore(changement, head[0].children[0]);*/
+  
 } else {}
 
 

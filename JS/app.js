@@ -29,7 +29,7 @@ fetchWorks().then(works => {
   displayFilters(works);
   doFilter(works);
 
-  })
+})
 
   // Fonction d’affichage de la galerie de la page d’accueil ou du mode
 function fetchWorksDisplayGallery(works, targetElement) {
@@ -81,80 +81,7 @@ function cleanup() {
     child = galleryElement.lastElementChild;
   }
 }
-/*
-  //supprimer la classe "filter_active" de tous les filtres
-function deleteClass() {
-  const buttonFilters = document.querySelectorAll(".filter");
-  buttonFilters.forEach(buttonFilter => buttonFilter.classList.remove("filter_active"));
-}
-  //Fonction permettant d'afficher tous les travaux en cliquant sur le filtre tout
-function viewAllWorks() {
-  const sort = works.filter(id => id.length > works);
-  console.log(sort);
-  //Afficher tous les projets 
-  works.forEach(work => work.style.display = "block");
-  deleteClass();
-  
-  //cliqueant sur le filtre "tous", tous les projets sont affichées
-  filterAll.addEventListener("click", viewAllWorks);
-  // Parcourir tous les filters, à l'exception du fitre "tous"
-  buttonFilters.forEach(buttonFilter => {
-    if (buttonFilter !== filterAll) {
-      buttonFilter.addEventListener("click", (event) => { filterWorks(event)})
-    }
-  });
- 
-}*/
-//récupérer des données de l'API "catégories"
-/*
-fetch ('http://localhost:5678/api/categories')
-.then((categories) => categories.json())
-.then((data) => console.log(data));
-*//*
-async function fetchCategories() {
-  const reponse = await fetch ('http://localhost:5678/api/categories');
-  const data = await reponse.json();
-  return data;
-}
-fetchCategories().then(categories => {
-  console.log(categories);
-  categories.forEach((category) => { 
-    filterWorks('event');
-    filterList(Array.from);
-    createElementbutton('classNames','textContent');
-    deleteClass();
-    viewAllWorks();
-    setDisplayStyle('element', 'displayValue'); 
-   
-    const filter = document.createElement("li");
-    filter.innerText = category.name;
-    filter.classList.add("li");
-  
-    filter.addEventListener("click", async () => {
-      const filterData = categories.filter(
-        (data) => data.categoryId === category.id);
-    /*  renderGallery(filterData);*//*
-    });*//*
-    function addElement() {
-      const filter = document.createElement('button');
-      filter.classList.add('button_filter');
-    }
-  //fonction pour filter et afficher par catégories les projets
-    function filterWorks(event) {
-      deleteClass(); 
-      this.Array = event;
-     
-      filterAll = document.getElementsByName(filterWorks); 
 
-    //Récupérer tous les travaux  
-      const works = document.querySelectorAll(".work");
-      works.forEach(work => {
-        work.style.display = work.dataset.category === buttonFilterId ? "block" : "none";
-      })
-    } 
-  });
-  
-});*/
 
 // Fonction d’affichage des filtres 
 function displayFilters(works) {
@@ -218,59 +145,3 @@ function filterProjet(works,filter) {
   }
 }
 
-
-/*
-
-
-//fonction pour créer un bouton 
-/*
-function createElementbutton(classNames = [], textContent = "") {
-  const button = document.createElement("div"); 
-  button.setAttribute("role", "button");
-
-  if (Array.isArray(classNames)) {
-    classNames.forEach(className => {
-      button.classList.add(className);
-    });
-  } else {
-    button.classList.add(classNames);
-  }
-  if (textContent) {
-    button.textContent = textContent;
-  }
-  return button;
-}
-
-// créer une icone
-function createIcon(...classNames) {
-  const icon = document.createElement("i");
-  classNames.forEach(className => {
-    icon.classList.add(className);
-  });
-  return icon;
-} 
-
-
-//fonction permettant de rafraichir la galerie
-function freshGallery(selector) {
-  const gallery = document.querySelector(selector);
-  if(gallery) {
-    gallery.innerHTML = '';
-    fetchWorksDisplayGallery(selector);
-  }
-}
-
-//Fonction permettant de créer et d'afficher un message d'erreur 
-function errorMessage(message, selector) {
-  const containerError = document.querySelector(selector);
-  const errorElement = containerError.querySelector('.error-message');
-  if(errorElement) {
-    errorElement.remove();
-  }
-  const errorDuMessage = document.createElement('p');
-
-  errorDuMessage.classList.add('error-message');
-  errorDuMessage.innerHTML = message;
-
-  containerError.appendChild(errorDuMessage);
-} */

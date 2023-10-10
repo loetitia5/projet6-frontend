@@ -7,7 +7,7 @@ async function controle(event) {
     let response = await fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: {
-        "Content-Type": "application/json; charset=UTF-8" 
+            "Content-Type": "application/json; charset=UTF-8" 
         },
         body: JSON.stringify({
             email: mail,
@@ -18,11 +18,11 @@ async function controle(event) {
     console.log(responseData);
     const token = responseData.token; 
     //Vérifier le code
-   if(token) {
-        //Enregistrement du token et redirection vers la page d'accueil
-        window.localStorage.setItem("token", token);
-        window.location.href = './index.html';
-        
+    if(token) {
+            //Enregistrement du token et redirection vers la page d'accueil
+            window.localStorage.setItem("token", token);
+            window.location.href = './index.html';
+            
     } else {
         alert("L'email ou et le mot de passe n'est pas valide");
     } 
