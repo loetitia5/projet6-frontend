@@ -46,6 +46,7 @@ function fetchWorksDisplayGallery(works, targetElement) {
       const img = document.createElement('img');
       img.src = jsonWork.imageUrl;
       img.alt = jsonWork.title;
+      img.setAttribute("id", "imagesupp");
         
       figure.appendChild(img);
       //Si l'élément ciblé est la galerie, créer l'élément figcaption avec son title associé

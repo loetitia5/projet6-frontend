@@ -50,7 +50,7 @@ table {
 /** end reset css**/
 
 body {
-	max-width: 1140px;
+	max-width: 1440px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -123,9 +123,10 @@ nav li a:hover {
 	font-weight: 600;
 	color: black;
 }
-html body #barreLogin {
-	max-width: 1440px;
-	margin: 0;
+header,  main, footer{
+	max-width: 1140px;
+	margin-left: 10%;
+    margin-right: 10%;
 }
 .barreLogin {
 	background-color: black;

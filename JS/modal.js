@@ -291,7 +291,14 @@ function cleanup(gallerySelector="") {
     child = galleryElement.lastElementChild;
   }
 }
- 
+// Get the image element by its ID
+var imageToRemove = document.getElementById("imagesupp");
+
+// Check if the element exists before trying to remove it
+if (imageToRemove) {
+    imageToRemove.parentNode.removeChild(imageToRemove);
+}
+
 //supprimer un projet
 async function workDelete(idWork) {
     const token = window.localStorage.getItem('token');
@@ -309,6 +316,8 @@ async function workDelete(idWork) {
         fetchWorks().then(works => {
           cleanup("#dialog-gallery");
           fetchWorksDisplayGallery(works, '#dialog-gallery');
+          cleanup();
+          fetchWorksDisplayGallery(works, '.gallery');
         })
       } else {
         alert("HTTP-Error: " + response.status);
